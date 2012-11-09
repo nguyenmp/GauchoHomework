@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.common.MenuUtils;
+import com.nguyenmp.gauchodroid.upload.UploadActivity;
 
 public class PhotoFragment extends SherlockFragment
 							implements PhotoDownloadListener {
@@ -41,6 +43,7 @@ public class PhotoFragment extends SherlockFragment
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle inState) {
+		//Must be called in order to show our options menu in the action bar
 		super.setHasOptionsMenu(true);
 		
 		//Inflate the content view
@@ -81,8 +84,9 @@ public class PhotoFragment extends SherlockFragment
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
-		
+
 		MenuUtils.addMenuItem(menu, "Refresh");
+		MenuUtils.addMenuItem(menu, "Upload Photo");
 	}
 	
 	@Override
@@ -90,6 +94,10 @@ public class PhotoFragment extends SherlockFragment
 		if (item.getTitle().equals("Refresh")) {
 			refresh();
 			return true;
+		} else if (item.getTitle().equals("Upload Photo")) {
+			Intent intent = new Intent(getActivity(), UploadActivity.class);
+			intent.putExtra(UploadActivity.EXTRA_SELECTED_TAB, UploadActivity.SELECTED_TAB_PHOTO);
+			startActivity(intent);
 		}
 		
 		return super.onOptionsItemSelected(item);

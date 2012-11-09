@@ -14,8 +14,7 @@ import com.nguyenmp.gauchodroid.forum.ForumFragment;
 public class CoursesActivity extends SuperGauchoActivity {
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
-	
-	/** Called when the activity is first created. */
+
 	@Override
 	public void onCreate(Bundle inState) {
 		super.onCreate(inState);
