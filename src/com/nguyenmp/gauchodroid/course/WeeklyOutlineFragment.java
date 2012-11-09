@@ -13,6 +13,7 @@ import org.xml.sax.SAXNotSupportedException;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class WeeklyOutlineFragment extends SherlockListFragment {
 		int courseID = Integer.valueOf(getActivity().getIntent().getData().getQueryParameter("id"));
 		CookieStore cookies = LoginManager.getCookies(getActivity());
 		
-		CalendarHandler handler = new CalendarHandler(mCalendar, adapter, this);
+		CalendarHandler handler = new CalendarHandler(mCalendar, adapter, inflater.getContext());
 		CalendarDownloader downloader = new CalendarDownloader(courseID, cookies);
 		downloader.setHandler(handler);
 		downloader.start();
@@ -205,16 +206,15 @@ public class WeeklyOutlineFragment extends SherlockListFragment {
 	private static class CalendarHandler extends Handler {
 		private final List<Week> mCalendar;
 		private final BaseAdapter mAdapter;
-		private final SherlockListFragment mContext;
+		private final Context mContext;
 		
-		CalendarHandler(List<Week> calendar, BaseAdapter adapter, SherlockListFragment context) {
+		CalendarHandler(List<Week> calendar, BaseAdapter adapter, Context context) {
 			mCalendar = calendar;
 			mContext = context;
 			mAdapter = adapter;
 		}
 		
 		public void handleMessage(Message message) {
-			mContext.setListShown(true);
 			
 			if (message.obj instanceof List<?>) {
 				@SuppressWarnings("unchecked")
@@ -222,10 +222,9 @@ public class WeeklyOutlineFragment extends SherlockListFragment {
 				mCalendar.addAll(calendar);
 				mAdapter.notifyDataSetChanged();
 				
-				if (mCalendar.size() == 0) mContext.setEmptyText("List is empty");
 			} else if (message.obj instanceof Exception) {
 				Exception e = (Exception) message.obj;
-				AlertDialogFactory.createAlert(e.getClass().getName(), e.toString(), mContext.getActivity()).show();
+				AlertDialogFactory.createAlert(e.getClass().getName(), e.toString(), mContext).show();
 			}
 		}
 	}
