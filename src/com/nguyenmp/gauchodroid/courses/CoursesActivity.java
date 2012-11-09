@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.nguyenmp.gauchodroid.EventFragment;
+import com.nguyenmp.gauchodroid.PhotoFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.SuperGauchoActivity;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
 import com.nguyenmp.gauchodroid.forum.ForumFragment;
-import com.nguyenmp.gauchodroid.upload.UploadEventFragment;
-import com.nguyenmp.gauchodroid.upload.UploadPhotoFragment;
 
 public class CoursesActivity extends SuperGauchoActivity {
 	private ViewPager mViewPager;
@@ -31,8 +31,8 @@ public class CoursesActivity extends SuperGauchoActivity {
 
 		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumFragment.class, inState);
 		mTabsAdapter.addTab(actionBar.newTab().setText("My Courses"), MyCoursesFragment.class, inState);
-		mTabsAdapter.addTab(actionBar.newTab().setText("Upload Photo"), UploadPhotoFragment.class, inState);
-		mTabsAdapter.addTab(actionBar.newTab().setText("Upload Event"), UploadEventFragment.class, inState);
+		mTabsAdapter.addTab(actionBar.newTab().setText("Photos"), PhotoFragment.class, inState);
+		mTabsAdapter.addTab(actionBar.newTab().setText("Events"), EventFragment.class, inState);
 		
 		actionBar.setSelectedNavigationItem(1);
 	}
