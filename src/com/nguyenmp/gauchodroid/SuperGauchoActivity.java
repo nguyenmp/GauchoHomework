@@ -57,6 +57,7 @@ public class SuperGauchoActivity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getTitle().equals("Log Out")) {
 			logout();
+			return true;
 		}
 		
 		if (item.getItemId() == android.R.id.home) {

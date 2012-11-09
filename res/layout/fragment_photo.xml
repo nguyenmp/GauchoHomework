@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
 	<ProgressBar
-	    android:id="@+id/gauchospace_photo_progress_bar"
+	    android:id="@+id/fragment_photo_progress_bar"
 	    style="?android:attr/progressBarStyleLarge"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content" />
@@ -14,7 +14,6 @@
 	<TextView 
 	    android:id="@+id/fragment_photo_header"
 	    android:visibility="gone"
-	    android:textStyle="bold"
 	    android:gravity="center_horizontal"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"/>
