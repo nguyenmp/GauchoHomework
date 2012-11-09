@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, GauchoDroidActivity!</string>
+    <string name="app_name">Gaucho Homework</string>
+    <string name="gaucho_space">Gaucho Homework</string>
+    <string name="gaucho_downloads">Gaucho Downloads</string>
+    
+    <string name="log_in">Log In</string>
+    <string name="log_out">Log Out</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="search">Search</string>
+    <string name="courses">Courses</string>
+    <string name="store">Store</string>
+
+</resources>

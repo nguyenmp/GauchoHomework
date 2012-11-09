@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal" >"
+    
+    <EditText 
+        android:id="@+id/fragment_login_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:inputType="textNoSuggestions"
+        android:hint="UCSBnetID" />
+    
+    <EditText 
+        android:id="@+id/fragment_login_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:hint="Password" />
+    
+    <Button
+        android:id="@+id/fragment_login_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In" />
+</LinearLayout>

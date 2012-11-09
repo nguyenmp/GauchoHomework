@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+	
+    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <EditText
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:hint="Display Name"
+	        android:inputType="textPersonName"
+	        android:singleLine="true" >
+	
+	        <requestFocus />
+	    </EditText>
+	    
+	    <EditText
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:singleLine="true"
+	        android:hint="Description"
+	        android:inputType="textPersonName" />
+	    
+	    <TextView
+	        android:text=""
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" />
+	    
+	    <Button 
+	        android:text="Choose File"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"/>
+	    
+	    <CheckBox 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:checked="true"
+	        android:text=" I own this photo and grant UCSB permission to display it" />
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="8dip"
+	        android:orientation="horizontal">
+	        
+	        
+		    <Button 
+		        android:padding="8dip"
+		        android:layout_weight="1"
+		        android:text="Cancel"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"/>
+		    
+		    <Button 
+		        android:layout_weight="1"
+		        android:text="Submit"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"/>
+	    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
