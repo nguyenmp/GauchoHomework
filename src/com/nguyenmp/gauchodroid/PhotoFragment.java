@@ -25,6 +25,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.common.HandledThread;
+import com.nguyenmp.gauchodroid.common.MenuUtils;
 
 public class PhotoFragment extends SherlockFragment
 							implements PhotoDownloadListener {
@@ -81,18 +82,7 @@ public class PhotoFragment extends SherlockFragment
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 		
-		boolean hasRefresh = false;
-		for (int i = 0; i < menu.size(); i++) {
-			if (menu.getItem(i).getTitle().equals("Refresh"))
-				hasRefresh = true;
-		}
-		
-		//Create and add the refresh item
-		if (!hasRefresh) {
-			MenuItem refreshItem = menu.add("Refresh");
-			refreshItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
-			//TODO: Add an icon for the refresh item
-		}
+		MenuUtils.addMenuItem(menu, "Refresh");
 	}
 	
 	@Override
