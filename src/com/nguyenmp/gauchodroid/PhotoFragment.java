@@ -108,7 +108,7 @@ public class PhotoFragment extends SherlockFragment
 		mImageView.setVisibility(View.GONE);
 		mHeaderView.setVisibility(View.GONE);
 		
-		PhotoDownloadHandler handler = new PhotoDownloadHandler(this, mHeaderView);
+		PhotoDownloadHandler handler = new PhotoDownloadHandler(this, mProgressBar, mHeaderView);
 		Thread downloadThread = new PhotoDownloadThread(handler);
 		downloadThread.start();
 	}
@@ -215,6 +215,7 @@ public class PhotoFragment extends SherlockFragment
 	private static class PhotoDownloadHandler extends Handler {
 		private final TextView mHeaderView;
 		private final PhotoDownloadListener mListener;
+		private final ProgressBar mProgressBar;
 		
 		/**
 		 * Creates a new 
@@ -224,13 +225,15 @@ public class PhotoFragment extends SherlockFragment
 		 * @param headerView The text view to display the name and title of the 
 		 * piece or any error messages that may result from the PhotoDownloadThread.
 		 */
-		private PhotoDownloadHandler(PhotoDownloadListener listener, TextView headerView) {
+		private PhotoDownloadHandler(PhotoDownloadListener listener, ProgressBar progressBar, TextView headerView) {
 			mHeaderView = headerView;
 			mListener = listener;
+			mProgressBar = progressBar;
 		}
 		
 		@Override
 		public void handleMessage(Message message) {
+			mProgressBar.setVisibility(View.GONE);
 			
 			//If we get a payload
 			if (message.obj != null && message.obj instanceof PhotoDownload) {

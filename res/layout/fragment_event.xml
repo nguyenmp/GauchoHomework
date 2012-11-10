@@ -1,66 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
-	
-    <LinearLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
+    android:layout_height="fill_parent" >
+    <LinearLayout
+        android:id="@+id/fragment_event_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+	    android:layout_gravity="center_vertical"
+    	android:gravity="center_horizontal"
 	    android:orientation="vertical" >
-	    
-	    <EditText
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:hint="Display Name"
-	        android:inputType="textPersonName"
-	        android:singleLine="true" >
 	
-	        <requestFocus />
-	    </EditText>
-	    
-	    <EditText
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:singleLine="true"
-	        android:hint="Description"
-	        android:inputType="textPersonName" />
-	    
-	    <TextView
-	        android:text=""
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content" />
-	    
-	    <Button 
-	        android:text="Choose File"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"/>
-	    
-	    <CheckBox 
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:checked="true"
-	        android:text=" I own this photo and grant UCSB permission to display it" />
-	    
-	    <LinearLayout 
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="8dip"
-	        android:orientation="horizontal">
-	        
-	        
-		    <Button 
-		        android:padding="8dip"
-		        android:layout_weight="1"
-		        android:text="Cancel"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"/>
-		    
-		    <Button 
-		        android:layout_weight="1"
-		        android:text="Submit"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"/>
-	    </LinearLayout>
-    </LinearLayout>
+		<ProgressBar
+		    android:id="@+id/fragment_event_progress_bar"
+		    style="?android:attr/progressBarStyleLarge"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" />
+		
+		<TextView 
+		    android:id="@+id/fragment_event_title"
+		    android:visibility="gone"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+		
+		<TextView 
+		    android:id="@+id/fragment_event_time"
+		    android:visibility="gone"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+		
+		<ImageView 
+		    android:id="@+id/fragment_event_image"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:contentDescription="Event Image"
+		    android:visibility="gone" />
+		
+		<TextView 
+		    android:id="@+id/fragment_event_description"
+		    android:visibility="gone"
+		    android:gravity="center_horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"/>
+	</LinearLayout>
 </ScrollView>
