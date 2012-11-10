@@ -1,6 +1,7 @@
 package com.nguyenmp.gauchodroid.course;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +41,11 @@ import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.parser.WeeklyOutlineParser.UnparsableHtmlException;
 import com.nguyenmp.gauchospace.thing.Week;
 
-public class WeeklyOutlineFragment extends SherlockListFragment {
+public class WeeklyOutlineFragment extends SherlockListFragment implements WeeklyOutlineDownloadListener {
 	private List<Week> mCalendar;
+	private BaseAdapter mListAdapter;
+	private boolean mLoaded = false;
+	private static final String KEY_CALENDAR = "lwkjefiuo32u490-2934b q08u4";
 	
 	@Override
 	public void onActivityCreated(Bundle inState) {
@@ -53,16 +57,21 @@ public class WeeklyOutlineFragment extends SherlockListFragment {
 		View view = super.onCreateView(inflater, container, inState);
 		
 		mCalendar = new ArrayList<Week>();
-		BaseAdapter adapter = new CourseWeekAdapter(mCalendar);
-		setListAdapter(adapter);
+		mListAdapter = new CourseWeekAdapter(mCalendar);
+		setListAdapter(mListAdapter);
 		
-		int courseID = Integer.valueOf(getActivity().getIntent().getData().getQueryParameter("id"));
-		CookieStore cookies = LoginManager.getCookies(getActivity());
-		
-		CalendarHandler handler = new CalendarHandler(mCalendar, adapter, inflater.getContext());
-		CalendarDownloader downloader = new CalendarDownloader(courseID, cookies);
-		downloader.setHandler(handler);
-		downloader.start();
+		if (inState != null && inState.containsKey(KEY_CALENDAR)) {
+			onDownloaded((List<Week>) inState.getSerializable(KEY_CALENDAR));
+		} else {
+			onDownloaded(null);
+			int courseID = Integer.valueOf(getActivity().getIntent().getData().getQueryParameter("id"));
+			CookieStore cookies = LoginManager.getCookies(getActivity());
+			
+			CalendarHandler handler = new CalendarHandler(this, inflater.getContext());
+			CalendarDownloader downloader = new CalendarDownloader(courseID, cookies);
+			downloader.setHandler(handler);
+			downloader.start();
+		}
 		
 		return view;
 	}
@@ -123,7 +132,26 @@ public class WeeklyOutlineFragment extends SherlockListFragment {
 		});
 	}
 	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if (mLoaded) {
+			outState.putSerializable(KEY_CALENDAR, (Serializable) mCalendar);
+		}
+	}
 	
+	@Override
+	public void onDownloaded(List<Week> weeklyOutline) {
+		if (weeklyOutline != null) {
+			mLoaded = true;
+			mCalendar.clear();
+			mCalendar.addAll(weeklyOutline);
+		} else {
+			mLoaded = false;
+			mCalendar.clear();
+		}
+		
+		mListAdapter.notifyDataSetChanged();
+	}
 	
 	private static class CourseWeekAdapter extends BaseAdapter {
 		private final List<Week> mWeeklyOutline;
@@ -204,24 +232,17 @@ public class WeeklyOutlineFragment extends SherlockListFragment {
 	}
 	
 	private static class CalendarHandler extends Handler {
-		private final List<Week> mCalendar;
-		private final BaseAdapter mAdapter;
+		private final WeeklyOutlineDownloadListener mListener;
 		private final Context mContext;
 		
-		CalendarHandler(List<Week> calendar, BaseAdapter adapter, Context context) {
-			mCalendar = calendar;
+		CalendarHandler(WeeklyOutlineDownloadListener listener, Context context) {
+			mListener = listener;
 			mContext = context;
-			mAdapter = adapter;
 		}
 		
 		public void handleMessage(Message message) {
-			
 			if (message.obj instanceof List<?>) {
-				@SuppressWarnings("unchecked")
-				List<Week> calendar = (List<Week>) message.obj;
-				mCalendar.addAll(calendar);
-				mAdapter.notifyDataSetChanged();
-				
+				mListener.onDownloaded((List<Week>) message.obj);
 			} else if (message.obj instanceof Exception) {
 				Exception e = (Exception) message.obj;
 				AlertDialogFactory.createAlert(e.getClass().getName(), e.toString(), mContext).show();
