@@ -32,8 +32,10 @@ public class CourseActivity extends SuperGauchoActivity {
 		weeklyOutlineArgs.putInt(WeeklyOutlineFragment.ARGUMENT_COURSE_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 1));
 		mTabsAdapter.addTab(actionBar.newTab().setText("Weekly Outline"), WeeklyOutlineFragment.class, weeklyOutlineArgs);
 		
-		
-		mTabsAdapter.addTab(actionBar.newTab().setText("Grades"), GradesFragment.class, null);
+		//Add grades to the tabs
+		Bundle gradesArgs = new Bundle();
+		gradesArgs.putInt(GradesFragment.ARGUMENT_COURSE_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 0));
+		mTabsAdapter.addTab(actionBar.newTab().setText("Grades"), GradesFragment.class, gradesArgs);
 		
 		Bundle forumsArguments = new Bundle();
 		forumsArguments.putInt(ForumsFragment.ARGUMENT_FORUM_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 1));

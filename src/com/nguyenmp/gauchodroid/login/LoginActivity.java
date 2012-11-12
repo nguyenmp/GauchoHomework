@@ -53,7 +53,10 @@ public class LoginActivity extends SherlockFragmentActivity
 		final ActionBar actionBar = super.getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
-		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumFragment.class, inState);
+		
+		Bundle siteNewsArgs = new Bundle();
+		siteNewsArgs.putInt(ForumFragment.ARGUMENT_FORUM_ID, 1);
+		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumFragment.class, siteNewsArgs);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Login"), LoginFragment.class, inState);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Photo"), PhotoFragment.class, inState);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Event"), EventFragment.class, inState);
