@@ -55,9 +55,21 @@ public class PhotoFragment extends SherlockFragment
 		
 		ImageView imageView = (ImageView) contentView.findViewById(R.id.fragment_photo_image_view);
 		mImageView = imageView;
+		mImageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				refresh();
+			}
+		});
 		
 		TextView headerView = (TextView) contentView.findViewById(R.id.fragment_photo_header);
 		mHeaderView = headerView;
+		mHeaderView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				refresh();
+			}
+		});
 		
 		//If there was a previous state and it was already initialized
 		if (inState != null && inState.containsKey(KEY_PHOTO_DOWNLOAD)) {
@@ -244,14 +256,14 @@ public class PhotoFragment extends SherlockFragment
 			//If the payload fails to initialize
 			else if (message.obj != null && message.obj instanceof Exception) {
 				//Alert user with header view
-				mHeaderView.setText("Error downloading photo:\n\n" + ((Exception) message.obj).toString());
+				mHeaderView.setText("Error downloading photo:\n\n" + ((Exception) message.obj + "\n\nTap to refresh").toString());
 				mHeaderView.setVisibility(View.VISIBLE);
 			}
 			
 			//If some unknown error occured and something freakish and unexpected happened
 			else {
 				//Alert the user with the header view
-				mHeaderView.setText("Error downloading photo:\n\n" + "Unknown error");
+				mHeaderView.setText("Error downloading photo:\n\n" + "Unknown error \n\nTap to refresh");
 				mHeaderView.setVisibility(View.VISIBLE);
 			}
 		}
