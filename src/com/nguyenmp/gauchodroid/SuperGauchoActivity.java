@@ -26,7 +26,7 @@ public class SuperGauchoActivity extends SherlockFragmentActivity {
 	
 	public void onCreate(Bundle inState) {
 		super.onCreate(inState);
-		super.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+//		super.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 		super.getSupportActionBar().setHomeButtonEnabled(true);
 		super.getSupportActionBar().setDisplayShowHomeEnabled(true);
