@@ -15,7 +15,6 @@ import android.os.Message;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.login.LoginManager;
 import com.nguyenmp.gauchospace.GauchoSpaceClient;
