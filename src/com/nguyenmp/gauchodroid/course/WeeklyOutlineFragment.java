@@ -45,6 +45,7 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 	private List<Week> mCalendar;
 	private BaseAdapter mListAdapter;
 	private boolean mLoaded = false;
+	public static final String ARGUMENT_COURSE_ID = "course_id";
 	private static final String KEY_CALENDAR = "lwkjefiuo32u490-2934b q08u4";
 	
 	@Override
@@ -64,11 +65,11 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 			onDownloaded((List<Week>) inState.getSerializable(KEY_CALENDAR));
 		} else {
 			onDownloaded(null);
-			int courseID = Integer.valueOf(getActivity().getIntent().getData().getQueryParameter("id"));
 			CookieStore cookies = LoginManager.getCookies(getActivity());
 			
 			CalendarHandler handler = new CalendarHandler(this, inflater.getContext());
-			CalendarDownloader downloader = new CalendarDownloader(courseID, cookies);
+			System.out.println(getArguments().getInt(ARGUMENT_COURSE_ID));
+			CalendarDownloader downloader = new CalendarDownloader(getArguments().getInt(ARGUMENT_COURSE_ID), cookies);
 			downloader.setHandler(handler);
 			downloader.start();
 		}
@@ -208,6 +209,7 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 		
 		public void run() {
 			try {
+				System.out.println(mCourseID);
 				dispatchMessage(GauchoSpaceClient.getWeeklyOutlineFromCourse(mCourseID, mCookies));
 			} catch (SAXNotRecognizedException e) {
 				dispatchMessage(e);

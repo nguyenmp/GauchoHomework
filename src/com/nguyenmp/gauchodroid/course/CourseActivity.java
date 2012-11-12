@@ -7,9 +7,10 @@ import com.actionbarsherlock.app.ActionBar;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.SuperGauchoActivity;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
-import com.nguyenmp.gauchodroid.forum.ForumFragment;
+import com.nguyenmp.gauchodroid.forum.ForumsFragment;
 
 public class CourseActivity extends SuperGauchoActivity {
+	public static final String EXTRA_COURSE_ID = "course_idslkj";
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
 	
@@ -25,10 +26,20 @@ public class CourseActivity extends SuperGauchoActivity {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		mTabsAdapter = new TabsAdapter(this, mViewPager);
-
-		mTabsAdapter.addTab(actionBar.newTab().setText("Weekly Outline"), WeeklyOutlineFragment.class, inState);
-		mTabsAdapter.addTab(actionBar.newTab().setText("Grades"), GradesFragment.class, inState);
-		mTabsAdapter.addTab(actionBar.newTab().setText("Forum"), ForumFragment.class, inState);
-		mTabsAdapter.addTab(actionBar.newTab().setText("Resources"), ResourcesFragment.class, inState);
+		
+		//Add weekly outline to the list
+		Bundle weeklyOutlineArgs = new Bundle();
+		weeklyOutlineArgs.putInt(WeeklyOutlineFragment.ARGUMENT_COURSE_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 1));
+		mTabsAdapter.addTab(actionBar.newTab().setText("Weekly Outline"), WeeklyOutlineFragment.class, weeklyOutlineArgs);
+		
+		
+		mTabsAdapter.addTab(actionBar.newTab().setText("Grades"), GradesFragment.class, null);
+		
+		Bundle forumsArguments = new Bundle();
+		forumsArguments.putInt(ForumsFragment.ARGUMENT_FORUM_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 1));
+		mTabsAdapter.addTab(actionBar.newTab().setText("Forum"), ForumsFragment.class, forumsArguments);
+		
+		
+		mTabsAdapter.addTab(actionBar.newTab().setText("Resources"), ResourcesFragment.class, null);
 	}
 }

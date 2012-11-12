@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.nguyenmp.gauchodroid.R;
 
 public class ForumFragment extends SherlockFragment {
+	public static final String ARGUMENT_FORUM_ID = "argument_forum id";
 	
 	@Override
 	public void onActivityCreated(Bundle inState) {

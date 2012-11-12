@@ -9,7 +9,6 @@ import com.nguyenmp.gauchodroid.PhotoFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.SuperGauchoActivity;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
-import com.nguyenmp.gauchodroid.forum.ForumFragment;
 import com.nguyenmp.gauchodroid.forum.ForumsFragment;
 
 public class CoursesActivity extends SuperGauchoActivity {

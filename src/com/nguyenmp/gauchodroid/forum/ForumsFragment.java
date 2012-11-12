@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -53,16 +54,15 @@ public class ForumsFragment extends SherlockFragment
 	@Override
 	public void onActivityCreated(Bundle inState) {
 		super.onActivityCreated(inState);
-		
+
+		mForumList = new ArrayList<Forum>();
+		mListAdapter = new ForumsListAdapter(this, getActivity(), mForumList);
+		mListView.setAdapter(mListAdapter);
 		if (inState != null && inState.containsKey(KEY_FORUM_LIST)) {
-			mForumList = (List<Forum>) inState.getSerializable(KEY_FORUM_LIST);
-			mListAdapter = new ForumsListAdapter(this, getActivity(), mForumList);
-			mListView.setAdapter(mListAdapter);
+			setForums((List<Forum>) inState.getSerializable(KEY_FORUM_LIST));
 			mLoaded = true;
 		} else {
-			mForumList = new ArrayList<Forum>();
-			mListAdapter = new ForumsListAdapter(this, getActivity(), mForumList);
-			mListView.setAdapter(mListAdapter);
+			//Disable loadedness
 			mLoaded = false;
 			
 			//Execute download
@@ -207,6 +207,10 @@ public class ForumsFragment extends SherlockFragment
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
-		//TODO: React to forum post click
+		Forum forum = mForumList.get(position);
+		
+		Intent intent = new Intent(getActivity(), ForumActivity.class);
+		intent.putExtra(ForumActivity.EXTRA_FORUM_ID, forum.getID());
+		startActivity(intent);
 	}
 }
