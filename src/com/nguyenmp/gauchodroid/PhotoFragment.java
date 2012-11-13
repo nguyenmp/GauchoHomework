@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -98,6 +99,7 @@ public class PhotoFragment extends SherlockFragment
 		super.onPrepareOptionsMenu(menu);
 
 		MenuUtils.addMenuItem(menu, "Refresh");
+		MenuUtils.addMenuItem(menu, "Share Photo");
 		MenuUtils.addMenuItem(menu, "Upload Photo");
 	}
 	
@@ -110,6 +112,16 @@ public class PhotoFragment extends SherlockFragment
 			Intent intent = new Intent(getActivity(), UploadActivity.class);
 			intent.putExtra(UploadActivity.EXTRA_SELECTED_TAB, UploadActivity.SELECTED_TAB_PHOTO);
 			startActivity(intent);
+		} else if (item.getTitle().equals("Share Photo")) {
+			if (mCurrentPhotoDownload != null) {
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				intent.setType("text/plain");
+				intent.putExtra(Intent.EXTRA_TEXT, mCurrentPhotoDownload.url);
+				startActivity(Intent.createChooser(intent, "Send via:"));
+				System.out.println(mCurrentPhotoDownload.url);
+			} else {
+				Toast.makeText(getActivity(), "No photo to share.", Toast.LENGTH_LONG).show();
+			}
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -204,7 +216,7 @@ public class PhotoFragment extends SherlockFragment
 				String title = stringBuilder.substring(start, end);
 				
 				//Return the payload
-				PhotoDownload payload = new PhotoDownload(displayName, title, bitmap);
+				PhotoDownload payload = new PhotoDownload(displayName, title, bitmap, imageURL);
 				dispatchMessage(payload);
 			} catch (MalformedURLException e) {
 				//Return the error

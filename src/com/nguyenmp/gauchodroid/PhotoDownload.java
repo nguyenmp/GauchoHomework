@@ -22,16 +22,20 @@ public class PhotoDownload implements Parcelable {
 	/** the bitmap of the actual image */
 	public final Bitmap bitmap;
 	
+	/** the url of the image */
+	public final String url;
+	
 	/**
 	 * Creates a new PhotoDownload container holding the given parameters
 	 * @param displayName the display name of the uploader (username)
 	 * @param title the title of the piece
 	 * @param bitmap the bitmap of the image
 	 */
-	PhotoDownload(String displayName, String title, Bitmap bitmap) {
+	PhotoDownload(String displayName, String title, Bitmap bitmap, String url) {
 		this.displayName = displayName;
 		this.title = title;
 		this.bitmap = bitmap;
+		this.url = url;
 	}
 
 	@Override
@@ -47,12 +51,14 @@ public class PhotoDownload implements Parcelable {
 		dest.writeString(title);
 		dest.writeString(displayName);
 		dest.writeParcelable(bitmap, flags);
+		dest.writeString(url);
 	}
 	
 	public PhotoDownload(Parcel in) {
 		title = in.readString();
 		displayName = in.readString();
 		bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+		url = in.readString();
 	}
 	
 	public static final Parcelable.Creator<PhotoDownload> CREATOR = 
