@@ -7,23 +7,20 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-    	android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="28dip"
         android:singleLine="true"
-        android:ellipsize="middle"
+        android:ellipsize="end"
         android:id="@+id/list_item_forum_name" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-    	android:gravity="center_horizontal"
         android:id="@+id/list_item_forum_description" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-    	android:gravity="center_horizontal"
         android:id="@+id/list_item_forum_discussions" />
     
 </LinearLayout>
