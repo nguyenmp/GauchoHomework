@@ -7,11 +7,10 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-    	android:gravity="center_horizontal"
+        android:gravity="left"
         android:textStyle="bold"
         android:singleLine="true"
         android:ellipsize="end"
-        android:textSize="24dip"
         android:id="@+id/list_item_grade_item_title" />
     
 </LinearLayout>

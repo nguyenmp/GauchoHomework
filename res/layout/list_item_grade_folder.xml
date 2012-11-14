@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/list_item_grade_folder_layout"
     android:orientation="vertical" >
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-    	android:gravity="center_horizontal"
+        android:gravity="left"
         android:textStyle="bold"
-        android:textSize="28dip"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:id="@+id/list_item_grade_folder_title" />
     
     <LinearLayout 
         android:layout_width="fill_parent"
-        android:layout_height="60dip"
+        android:layout_height="wrap_content"
         android:paddingLeft="8dip"
         android:layout_margin="8dip"
         android:orientation="vertical"
-        android:id="@+id/list_item_grade_folder_content"
-        android:layout_below="@id/list_item_grade_folder_title" />
-    <View
-        android:layout_width="8dip"
-        android:layout_height="fill_parent"
-        android:background="@android:color/darker_gray"
-        android:layout_toLeftOf="@id/list_item_grade_folder_content" />"
+        android:id="@+id/list_item_grade_folder_content" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-    	android:gravity="center_horizontal"
-    	android:singleLine="true"
-    	android:ellipsize="end"
-        android:id="@+id/list_item_grade_folder_details"
-        android:layout_below="@id/list_item_grade_folder_content" />
+        android:gravity="left"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:id="@+id/list_item_grade_folder_details" />
     
-</RelativeLayout>
+</LinearLayout>
