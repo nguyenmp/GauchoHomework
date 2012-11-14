@@ -71,7 +71,6 @@ public class GauchoDownloader extends HandledThread {
 			e.printStackTrace();
 			dispatchMessage(e);
 		} finally {
-			System.out.println("Exiting download thread");
 			if (outStream != null) try {outStream.close();} catch (IOException e) {e.printStackTrace();}
 			if (inStream != null) try {inStream.close();} catch (IOException e) {e.printStackTrace();}
 		}
@@ -79,8 +78,6 @@ public class GauchoDownloader extends HandledThread {
 	}
 	
 	private File getFile(String filename) throws IOException {
-		System.out.println("Extern storage dir: " + Environment.getExternalStorageDirectory());
-		
 		File file = null;
 		String rootPath = Environment.getExternalStorageDirectory().getPath() + "/Download/";
 		

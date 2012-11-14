@@ -40,7 +40,6 @@ public class TabsAdapter extends FragmentStatePagerAdapter
 		mActivity = activity;
 		mActionBar = activity.getSupportActionBar();
 		mViewPager = pager;
-		System.out.println(mViewPager);
 		mViewPager.setAdapter(this);
 		mViewPager.setOnPageChangeListener(this);
 	}

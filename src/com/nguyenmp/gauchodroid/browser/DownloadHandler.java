@@ -25,7 +25,6 @@ public class DownloadHandler extends Handler {
 	
 	@Override
 	public void handleMessage(Message message) {
-		System.out.println("Caught some message for downloading...");
 		mNotif.flags &= ~Notification.FLAG_ONGOING_EVENT;
 		mNotif.flags &= ~Notification.FLAG_AUTO_CANCEL;
 		mNotif.flags |= Notification.FLAG_SHOW_LIGHTS;
@@ -48,11 +47,9 @@ public class DownloadHandler extends Handler {
 			
 			mNotif.setLatestEventInfo(mContext, "Downloaded " + file.getName(), file.getPath(), contentIntent);
 		} else if (message.obj instanceof Exception){
-			System.out.println("Caught exception from download");
 			mNotif.flags &= Notification.FLAG_AUTO_CANCEL;
 			mNotif.setLatestEventInfo(mContext, message.obj.getClass().getName(), ((Exception) message.obj).toString() , null);
 		} else {
-			System.out.println("Caught unknown error from download");
 			mNotif.flags &= Notification.FLAG_AUTO_CANCEL;
 			mNotif.setLatestEventInfo(mContext, "Error: Failed to download", "", null);
 		}

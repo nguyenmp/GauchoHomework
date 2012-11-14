@@ -17,7 +17,6 @@ public class MyDownloadListener implements DownloadListener {
 
 	public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
 		Toast.makeText(mContext, "Downloading: " + url, Toast.LENGTH_SHORT).show();
-		System.out.println("Downloading " + url);
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(url));
 		intent.setType(mimetype);

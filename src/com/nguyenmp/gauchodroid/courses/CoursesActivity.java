@@ -9,6 +9,7 @@ import com.nguyenmp.gauchodroid.PhotoFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.SuperGauchoActivity;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
+import com.nguyenmp.gauchodroid.forum.ForumFragment;
 import com.nguyenmp.gauchodroid.forum.ForumsFragment;
 
 public class CoursesActivity extends SuperGauchoActivity {
@@ -30,8 +31,8 @@ public class CoursesActivity extends SuperGauchoActivity {
 		
 		//Add the site news to the list
 		Bundle siteNewsForumArgs = new Bundle();
-		siteNewsForumArgs.putInt(ForumsFragment.ARGUMENT_FORUM_ID, 1);
-		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumsFragment.class, siteNewsForumArgs);
+		siteNewsForumArgs.putInt(ForumFragment.ARGUMENT_FORUM_ID, 1);
+		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumFragment.class, siteNewsForumArgs);
 		
 		mTabsAdapter.addTab(actionBar.newTab().setText("My Courses"), MyCoursesFragment.class, null);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Photos"), PhotoFragment.class, null);

@@ -24,7 +24,6 @@ public class MyWebViewClient extends WebViewClient {
 	
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//    	System.out.println(url);
     	if (url.startsWith("https://gauchospace.ucsb.edu/courses/file.php/")) {
 			List<String> pathSegments = Uri.parse(url).getPathSegments();
 			String filename = pathSegments.get(pathSegments.size() - 1);

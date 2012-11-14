@@ -118,7 +118,6 @@ public class PhotoFragment extends SherlockFragment
 				intent.setType("text/plain");
 				intent.putExtra(Intent.EXTRA_TEXT, mCurrentPhotoDownload.url);
 				startActivity(Intent.createChooser(intent, "Send via:"));
-				System.out.println(mCurrentPhotoDownload.url);
 			} else {
 				Toast.makeText(getActivity(), "No photo to share.", Toast.LENGTH_LONG).show();
 			}

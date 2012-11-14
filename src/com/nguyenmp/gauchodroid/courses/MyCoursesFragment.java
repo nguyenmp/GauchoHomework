@@ -52,7 +52,6 @@ public class MyCoursesFragment extends SherlockListFragment {
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		System.out.println(mLoaded);
 		if (mLoaded) outState.putSerializable(COURSE_LIST_KEY, (Serializable) mCourseList);
 	}
 	
@@ -64,16 +63,13 @@ public class MyCoursesFragment extends SherlockListFragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle inState) {
-		System.out.println("Creating view");
 		if (inState != null && inState.containsKey(COURSE_LIST_KEY)) {
-			System.out.println("Created view from saved state");
 			mCourseList = (List<Course>) inState.getSerializable(COURSE_LIST_KEY);
 			mListAdapter = new CourseListAdapter(mCourseList, getActivity());
 			
 			setListAdapter(mListAdapter);
 			mLoaded = true;
 		} else {
-			System.out.println("Created view from scratch");
 			mCourseList = new ArrayList<Course>();
 			mListAdapter = new CourseListAdapter(mCourseList, getActivity());
 			
@@ -94,7 +90,6 @@ public class MyCoursesFragment extends SherlockListFragment {
 		Uri uri = Uri.parse(course.getUrl());
 		Intent intent = new Intent(getActivity(), CourseActivity.class);
 		intent.putExtra(CourseActivity.EXTRA_COURSE_ID, Integer.parseInt(uri.getQueryParameter("id")));
-		System.out.println("Course id = " + uri.getQueryParameter("id"));
 		getActivity().startActivity(intent);
 	}
 	
@@ -197,7 +192,6 @@ public class MyCoursesFragment extends SherlockListFragment {
 				mCourseList.addAll(courses);
 				mListAdapter.notifyDataSetChanged();
 			} else if (message.obj instanceof NullPointerException) {
-				System.out.println("" + mContext);
 				LoginManager.setCookies(mContext, null);
 				Intent intent = new Intent(mContext, LoginActivity.class);
 				mContext.startActivity(intent);
