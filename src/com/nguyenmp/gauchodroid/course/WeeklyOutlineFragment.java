@@ -187,7 +187,7 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 			weekSummary.setText(week.getSummary());
 			
 			if (week.getCurrent()) {
-				convertView.setBackgroundColor(0xcc00ffff);
+				convertView.setBackgroundColor(0x4400ffff);
 			} else {
 				convertView.setBackgroundColor(Color.TRANSPARENT);
 			}
