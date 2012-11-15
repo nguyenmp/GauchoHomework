@@ -16,12 +16,10 @@ import com.nguyenmp.gauchospace.thing.Forum;
 public class ForumsListAdapter extends BaseAdapter {
 	private final List<Forum> mForums;
 	private final Context mContext;
-	private final OnItemClickListener mListener;
 	
-	ForumsListAdapter(OnItemClickListener listener, Context context, List<Forum> forums) {
+	ForumsListAdapter(Context context, List<Forum> forums) {
 		mForums = forums;
 		mContext = context;
-		mListener = listener;
 	}
 
 	@Override
@@ -48,13 +46,6 @@ public class ForumsListAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item_forum, container, false);
 		}
-		
-		convertView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mListener.onItemClick(null, null, position, 0);
-			}
-		});
 		
 		TextView nameTextView = (TextView) convertView.findViewById(R.id.list_item_forum_name);
 		nameTextView.setText(forum.getName());

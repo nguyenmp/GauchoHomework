@@ -56,8 +56,9 @@ public class ForumsFragment extends SherlockFragment
 		super.onActivityCreated(inState);
 
 		mForumList = new ArrayList<Forum>();
-		mListAdapter = new ForumsListAdapter(this, getActivity(), mForumList);
+		mListAdapter = new ForumsListAdapter(getActivity(), mForumList);
 		mListView.setAdapter(mListAdapter);
+		mListView.setOnItemClickListener(this);
 		if (inState != null && inState.containsKey(KEY_FORUM_LIST)) {
 			setForums((List<Forum>) inState.getSerializable(KEY_FORUM_LIST));
 			mLoaded = true;
