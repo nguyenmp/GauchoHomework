@@ -10,24 +10,24 @@ import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.SuperGauchoActivity;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
 import com.nguyenmp.gauchodroid.forum.ForumFragment;
-import com.nguyenmp.gauchodroid.forum.ForumsFragment;
 
-public class CoursesActivity extends SuperGauchoActivity {
+public class MyCoursesActivity extends SuperGauchoActivity {
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
 
 	@Override
 	public void onCreate(Bundle inState) {
 		super.onCreate(inState);
+		super.setContentView(R.layout.view_pager);
 		
-		setContentView(R.layout.view_pager);
-		
-		mViewPager = (ViewPager) super.findViewById(R.id.view_pager);
-		
+		//Initialize Action bar and view pager
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
+		mViewPager = (ViewPager) super.findViewById(R.id.view_pager);
 		mTabsAdapter = new TabsAdapter(this, mViewPager);
+		
+		//Set title
+		actionBar.setTitle("My Courses");
 		
 		//Add the site news to the list
 		Bundle siteNewsForumArgs = new Bundle();

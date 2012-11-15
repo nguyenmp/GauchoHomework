@@ -31,7 +31,7 @@ import com.nguyenmp.gauchodroid.EventFragment;
 import com.nguyenmp.gauchodroid.PhotoFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
-import com.nguyenmp.gauchodroid.courses.CoursesActivity;
+import com.nguyenmp.gauchodroid.courses.MyCoursesActivity;
 import com.nguyenmp.gauchodroid.forum.ForumFragment;
 
 /**
@@ -65,7 +65,7 @@ public class LoginActivity extends SherlockFragmentActivity
 	}
 	
 	public void onLogin(boolean success) {
-		Intent intent = new Intent(this, CoursesActivity.class);
+		Intent intent = new Intent(this, MyCoursesActivity.class);
 		startActivity(intent);
 		finish();
 	}

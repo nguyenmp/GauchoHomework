@@ -90,6 +90,7 @@ public class MyCoursesFragment extends SherlockListFragment {
 		Uri uri = Uri.parse(course.getUrl());
 		Intent intent = new Intent(getActivity(), CourseActivity.class);
 		intent.putExtra(CourseActivity.EXTRA_COURSE_ID, Integer.parseInt(uri.getQueryParameter("id")));
+		intent.putExtra(CourseActivity.EXTRA_TITLE, course.getName() + ": " + course.getTitle());
 		getActivity().startActivity(intent);
 	}
 	

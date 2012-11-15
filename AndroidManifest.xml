@@ -29,7 +29,7 @@
 		        <data android:mimeType="image/*" />
 		    </intent-filter>
 	    </activity>
-		<activity android:name=".courses.CoursesActivity" android:label="@string/gaucho_space" >
+		<activity android:name=".courses.MyCoursesActivity" android:label="@string/gaucho_space" >
 		    <intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
