@@ -74,8 +74,8 @@ public class EventFragment extends SherlockFragment implements EventDownloadList
 		super.onPrepareOptionsMenu(menu);
 		
 		//Try to add refresh and upload to the options menu
-		MenuUtils.addMenuItem(menu, "Refresh");
-		MenuUtils.addMenuItem(menu, "Upload Event");
+		MenuUtils.addMenuItem(menu, "Refresh").setIcon(R.drawable.ic_menu_refresh).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		MenuUtils.addMenuItem(menu, "Upload Event").setIcon(R.drawable.ic_menu_upload).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 	}
 	
 	@Override

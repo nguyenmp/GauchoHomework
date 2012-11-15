@@ -98,9 +98,9 @@ public class PhotoFragment extends SherlockFragment
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 
-		MenuUtils.addMenuItem(menu, "Refresh");
-		MenuUtils.addMenuItem(menu, "Share Photo");
-		MenuUtils.addMenuItem(menu, "Upload Photo");
+		MenuUtils.addMenuItem(menu, "Refresh").setIcon(R.drawable.ic_menu_refresh).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		MenuUtils.addMenuItem(menu, "Share Photo").setIcon(R.drawable.ic_menu_share).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		MenuUtils.addMenuItem(menu, "Upload Photo").setIcon(R.drawable.ic_menu_upload).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 	}
 	
 	@Override
