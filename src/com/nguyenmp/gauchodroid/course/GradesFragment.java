@@ -34,6 +34,7 @@ import com.nguyenmp.gauchospace.thing.grade.GradeItem;
 public class GradesFragment extends SherlockFragment implements GradesDownloadListener {
 	public static final String ARGUMENT_COURSE_ID = "argument_course_id";
 	private LinearLayout mContentView;
+	private Context mContext;
 	private static final String KEY_GRADE_FOLDER = "key-grade_folder";
 	private GradeFolder mGrades = null;
 	private boolean mLoaded = false;
@@ -41,6 +42,8 @@ public class GradesFragment extends SherlockFragment implements GradesDownloadLi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle inState) {
 		mContentView = (LinearLayout) inflater.inflate(R.layout.fragment_grades, container, false);
+		
+		mContext = getActivity();
 		if (inState != null && inState.containsKey(KEY_GRADE_FOLDER)) {
 			setGrades((GradeFolder) inState.getSerializable(KEY_GRADE_FOLDER));
 		} else {
@@ -123,11 +126,11 @@ public class GradesFragment extends SherlockFragment implements GradesDownloadLi
 		mLoaded = (grades != null);
 		mGrades = grades;
 		if (grades == null) {
-			TextView errorMessage = new TextView(mContentView.getContext());
+			TextView errorMessage = new TextView(mContext);
 			errorMessage.setText("No grades module for this class");
 			mContentView.addView(errorMessage);
 		} else {
-			ScrollView scrollView = new ScrollView(mContentView.getContext());
+			ScrollView scrollView = new ScrollView(mContext);
 			scrollView.addView(getGradesView(grades));
 			mContentView.addView(scrollView);
 		}
@@ -204,8 +207,8 @@ public class GradesFragment extends SherlockFragment implements GradesDownloadLi
 	
 	private View getGradesView(final GradeFolder grades) {
 		//Create a new view
-		if (getActivity() == null) return null;
-		View inflatedView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_grade_folder, mContentView, false);
+//		if (getActivity() == null) return null;
+		View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.list_item_grade_folder, mContentView, false);
 		TextView titleTextView = (TextView) inflatedView.findViewById(R.id.list_item_grade_folder_title);
 		titleTextView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -249,7 +252,7 @@ public class GradesFragment extends SherlockFragment implements GradesDownloadLi
 	
 	private View getGradesView(final GradeItem item) {
 		//Inflate new view
-		View inflatedView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_grade_item, null, false);
+		View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.list_item_grade_item, null, false);
 		
 		//Initialize the title
 		TextView titleTextView = (TextView) inflatedView.findViewById(R.id.list_item_grade_item_title);
