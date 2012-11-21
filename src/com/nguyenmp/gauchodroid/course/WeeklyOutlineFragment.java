@@ -24,27 +24,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.browser.MyWebViewClient;
-import com.nguyenmp.gauchodroid.common.AlertDialogFactory;
 import com.nguyenmp.gauchodroid.common.HandledThread;
+import com.nguyenmp.gauchodroid.common.MenuUtils;
 import com.nguyenmp.gauchodroid.login.LoginManager;
 import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.parser.WeeklyOutlineParser.UnparsableHtmlException;
 import com.nguyenmp.gauchospace.thing.Week;
 
-public class WeeklyOutlineFragment extends SherlockListFragment implements WeeklyOutlineDownloadListener {
+public class WeeklyOutlineFragment extends SherlockFragment implements WeeklyOutlineDownloadListener, OnItemClickListener {
 	private List<Week> mCalendar;
 	private BaseAdapter mListAdapter;
 	private boolean mLoaded = false;
+	private Context mContext;
+	
+	private ProgressBar mProgressBar;
+	private ListView mListView;
+	private TextView mTextView;
+	
 	public static final String ARGUMENT_COURSE_ID = "course_id";
 	private static final String KEY_CALENDAR = "lwkjefiuo32u490-2934b q08u4";
 	
@@ -55,44 +66,59 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle inState) {
-		View view = super.onCreateView(inflater, container, inState);
+		View inflatedView = inflater.inflate(R.layout.fragment_list, container, false);
+		super.setHasOptionsMenu(true);
+		
+		mContext = getActivity();
+
+		mListView = (ListView) inflatedView.findViewById(R.id.fragment_list_list_view);
+		mProgressBar = (ProgressBar) inflatedView.findViewById(R.id.fragment_list_progress_bar);
+		mTextView = (TextView) inflatedView.findViewById(R.id.fragment_list_text_view);
 		
 		mCalendar = new ArrayList<Week>();
 		mListAdapter = new CourseWeekAdapter(mCalendar);
-		setListAdapter(mListAdapter);
+		mListView.setAdapter(mListAdapter);
+		mListView.setOnItemClickListener(this);
+		
 		
 		if (inState != null && inState.containsKey(KEY_CALENDAR)) {
-			onDownloaded((List<Week>) inState.getSerializable(KEY_CALENDAR));
+			onDownloaded((List<Week>) inState.getSerializable(KEY_CALENDAR), "Unknown error");
 		} else {
-			onDownloaded(null);
-			CookieStore cookies = LoginManager.getCookies(getActivity());
-			
-			CalendarHandler handler = new CalendarHandler(this, inflater.getContext());
-			CalendarDownloader downloader = new CalendarDownloader(getArguments().getInt(ARGUMENT_COURSE_ID), cookies);
-			downloader.setHandler(handler);
-			downloader.start();
+			onDownloaded(null, null);
+			refresh();
 		}
 		
-		return view;
+		return inflatedView;
+	}
+	
+	public void refresh() {
+		onDownloaded(null, null);
+		
+		CookieStore cookies = LoginManager.getCookies(mContext);
+		
+		CalendarHandler handler = new CalendarHandler(this);
+		CalendarDownloader downloader = new CalendarDownloader(getArguments().getInt(ARGUMENT_COURSE_ID), cookies);
+		downloader.setHandler(handler);
+		downloader.start();
 	}
 	
 	@Override
-	public void onListItemClick(ListView listView, View view, int position, long id) {
-		Week week = (Week) listView.getItemAtPosition(position);
+	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+		Week week = (Week) mCalendar.get(position);
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setTitle(week.getTitle());
 		
-		final WebView webView = new WebView(getActivity());
+		final WebView webView = new WebView(mContext);
 		
-		RelativeLayout header = (RelativeLayout) LayoutInflater.from(getActivity()).inflate(R.layout.dialog_web_view_header, null);
+		RelativeLayout header = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.dialog_web_view_header, null);
 		
 		builder.setCustomTitle(header);
 		builder.setView(webView);
 		
 //		webView.loadData("<body bgcolor=\"#B0B0B0\">" + week.getHtml() + "</body>", "text/html; charset=UTF-8", null);
 		webView.loadData(week.getHtml(), "text/html; charset=UTF-8", null);
-		webView.setWebViewClient(new MyWebViewClient(getActivity()));
+		webView.setWebViewClient(new MyWebViewClient(mContext));
 		webView.setBackgroundColor(Color.parseColor("#C0C0C0"));
 		
 		
@@ -140,14 +166,50 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 	}
 	
 	@Override
-	public void onDownloaded(List<Week> weeklyOutline) {
-		if (weeklyOutline != null) {
-			mLoaded = true;
-			mCalendar.clear();
-			mCalendar.addAll(weeklyOutline);
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		
+		MenuUtils.addMenuItem(menu, "Refresh").setIcon(R.drawable.ic_menu_refresh).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getTitle().equals("Refresh")) {
+			refresh();
+			return true;
+		}
+		
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onDownloaded(List<Week> weeklyOutline, String message) {
+		mCalendar.clear();
+		mLoaded = (weeklyOutline != null);
+		if (weeklyOutline == null) {
+			if (message == null) {
+				mProgressBar.setVisibility(View.VISIBLE);
+				mTextView.setVisibility(View.GONE);
+				mListView.setVisibility(View.GONE);
+			} else {
+				mTextView.setText(message);
+				mTextView.setVisibility(View.VISIBLE);
+				mProgressBar.setVisibility(View.GONE);
+				mListView.setVisibility(View.GONE);
+			}
 		} else {
-			mLoaded = false;
-			mCalendar.clear();
+			if (weeklyOutline.isEmpty()) {
+				mTextView.setText("No Weekly Outline Found");
+				mTextView.setVisibility(View.VISIBLE);
+				mProgressBar.setVisibility(View.GONE);
+				mListView.setVisibility(View.GONE);
+			} else {
+				mCalendar.addAll(weeklyOutline);
+				mListAdapter.notifyDataSetChanged();
+				mListView.setVisibility(View.VISIBLE);
+				mTextView.setVisibility(View.GONE);
+				mProgressBar.setVisibility(View.GONE);
+			}
 		}
 		
 		mListAdapter.notifyDataSetChanged();
@@ -233,19 +295,18 @@ public class WeeklyOutlineFragment extends SherlockListFragment implements Weekl
 	
 	private static class CalendarHandler extends Handler {
 		private final WeeklyOutlineDownloadListener mListener;
-		private final Context mContext;
 		
-		CalendarHandler(WeeklyOutlineDownloadListener listener, Context context) {
+		CalendarHandler(WeeklyOutlineDownloadListener listener) {
 			mListener = listener;
-			mContext = context;
 		}
 		
 		public void handleMessage(Message message) {
 			if (message.obj instanceof List<?>) {
-				mListener.onDownloaded((List<Week>) message.obj);
+				mListener.onDownloaded((List<Week>) message.obj, "Unknown error");
 			} else if (message.obj instanceof Exception) {
-				Exception e = (Exception) message.obj;
-				AlertDialogFactory.createAlert(e.getClass().getName(), e.toString(), mContext).show();
+				mListener.onDownloaded(null, ((Exception) message.obj).toString());
+			} else {
+				mListener.onDownloaded(null, "Unknown error");
 			}
 		}
 	}

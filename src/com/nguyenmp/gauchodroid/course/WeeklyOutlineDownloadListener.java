@@ -5,5 +5,5 @@ import java.util.List;
 import com.nguyenmp.gauchospace.thing.Week;
 
 public interface WeeklyOutlineDownloadListener {
-	public void onDownloaded(List<Week> weeklyOutline);
+	public void onDownloaded(List<Week> weeklyOutline, String message);
 }
