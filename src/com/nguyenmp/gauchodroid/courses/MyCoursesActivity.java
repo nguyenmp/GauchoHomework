@@ -31,7 +31,7 @@ public class MyCoursesActivity extends SuperGauchoActivity {
 		
 		//Add the site news to the list
 		Bundle siteNewsForumArgs = new Bundle();
-		siteNewsForumArgs.putInt(ForumFragment.ARGUMENT_FORUM_ID, 1);
+		siteNewsForumArgs.putInt(ForumFragment.ARGUMENT_KEY_FORUM_ID, 1);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumFragment.class, siteNewsForumArgs);
 		
 		mTabsAdapter.addTab(actionBar.newTab().setText("My Courses"), MyCoursesFragment.class, null);

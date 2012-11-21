@@ -11,16 +11,16 @@
         android:textSize="20dip"
         android:singleLine="true"
         android:ellipsize="end"
-        android:id="@+id/list_item_forum_name" />
+        android:id="@+id/list_item_discussion_name" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_item_forum_description" />
+        android:id="@+id/list_item_discussion_replies" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_item_forum_discussions" />
+        android:id="@+id/list_item_discussion_last_post" />
     
 </LinearLayout>

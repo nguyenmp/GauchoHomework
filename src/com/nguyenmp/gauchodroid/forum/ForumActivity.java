@@ -25,7 +25,7 @@ public class ForumActivity extends SherlockFragmentActivity {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		Bundle args = new Bundle();
-		args.putInt(ForumFragment.ARGUMENT_FORUM_ID, getIntent().getIntExtra(EXTRA_FORUM_ID, 1));
-		mTabsAdapter.addTab(actionBar.newTab().setText("Forum"), ForumFragment.class, inState);
+		args.putInt(ForumFragment.ARGUMENT_KEY_FORUM_ID, getIntent().getIntExtra(EXTRA_FORUM_ID, 1));
+		mTabsAdapter.addTab(actionBar.newTab().setText("Forum"), ForumFragment.class, args);
 	}
 }

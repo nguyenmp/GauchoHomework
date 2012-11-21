@@ -55,7 +55,7 @@ public class LoginActivity extends SherlockFragmentActivity
 		
 		
 		Bundle siteNewsArgs = new Bundle();
-		siteNewsArgs.putInt(ForumFragment.ARGUMENT_FORUM_ID, 1);
+		siteNewsArgs.putInt(ForumFragment.ARGUMENT_KEY_FORUM_ID, 1);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Site News"), ForumFragment.class, siteNewsArgs);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Login"), LoginFragment.class, inState);
 		mTabsAdapter.addTab(actionBar.newTab().setText("Photo"), PhotoFragment.class, inState);
