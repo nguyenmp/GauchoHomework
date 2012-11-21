@@ -44,6 +44,8 @@ public class BrowserActivity extends SherlockActivity {
 		String backgroundColor = getIntent().getStringExtra(EXTRA_BACKGROUND);
 		if (backgroundColor != null)
 			mWebView.setBackgroundColor(Color.parseColor(backgroundColor));
+		else
+			mWebView.setBackgroundColor(Color.BLACK);
 		
 	    mWebView.setWebViewClient(new MyWebViewClient(this));
 	    mWebView.setWebChromeClient(new MyWebChromeClient(this));
