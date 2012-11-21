@@ -182,6 +182,7 @@ public class EventFragment extends SherlockFragment implements EventDownloadList
 				
 				//Get the image url
 				start = stringBuilder.indexOf("https://gauchospace.ucsb.edu/photouploads/events/", end);
+				if (start == -1) start = stringBuilder.indexOf("https://gauchospace.ucsb.edu/courses/login/noimage.jpeg");
 				end = stringBuilder.indexOf("'", start);
 				
 				//Get the image bitmap

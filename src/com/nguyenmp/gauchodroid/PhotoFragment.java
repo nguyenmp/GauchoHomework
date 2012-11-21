@@ -11,11 +11,13 @@ import java.net.URL;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -60,6 +62,21 @@ public class PhotoFragment extends SherlockFragment
 			@Override
 			public void onClick(View v) {
 				refresh();
+			}
+		});
+		
+		mImageView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if ((event.getActionMasked() & MotionEvent.ACTION_DOWN) == MotionEvent.ACTION_DOWN) {
+					if (event.getPointerCount() == 2 && mCurrentPhotoDownload != null) {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse(mCurrentPhotoDownload.url));
+						startActivity(intent);
+						return true;
+					}
+				}
+				return false;
 			}
 		});
 		
