@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -197,6 +198,7 @@ public class PhotoFragment extends SherlockFragment
 		
 		@Override
 		public void run() {
+			Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 			try {
 				//Connect to the homepage of gauchospace
 				URL url = new URL("https://gauchospace.ucsb.edu/");

@@ -20,6 +20,7 @@ import org.apache.http.protocol.HttpContext;
 
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Process;
 
 import com.nguyenmp.gauchodroid.common.HandledThread;
 
@@ -38,6 +39,7 @@ public class GauchoDownloader extends HandledThread {
 	}
 	
 	public void run() {
+		Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 		final HttpClient client = new DefaultHttpClient();
 		final HttpGet get = new HttpGet(mUrl);
 		final HttpContext context = getContext(mCookies);

@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,6 +142,7 @@ public class EventFragment extends SherlockFragment implements EventDownloadList
 		}
 		
 		public void run() {
+			Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 			try {
 				//Download from the login page which contains the events
 				URL url = new URL("https://gauchospace.ucsb.edu/courses/login/");

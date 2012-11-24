@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,6 +156,7 @@ public class ForumsFragment extends SherlockFragment
 		
 		@Override
 		public void run() {
+			Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 			List<Forum> forums;
 			try {
 				forums = GauchoSpaceClient.getForums(mCourseID, mCookieStore);

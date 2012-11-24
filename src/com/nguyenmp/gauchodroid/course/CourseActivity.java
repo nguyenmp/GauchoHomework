@@ -49,6 +49,10 @@ public class CourseActivity extends SuperGauchoActivity {
 		forumsArguments.putInt(ForumsFragment.ARGUMENT_FORUM_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 1));
 		mTabsAdapter.addTab(actionBar.newTab().setText("Forum"), ForumsFragment.class, forumsArguments);
 		
+		Bundle participantsArguments = new Bundle();
+		participantsArguments.putInt(ParticipantsFragment.ARGUMENT_COURSE_ID, getIntent().getIntExtra(EXTRA_COURSE_ID, 1));
+		mTabsAdapter.addTab(actionBar.newTab().setText("Participants"), ParticipantsFragment.class, participantsArguments);
+		
 		
 		mTabsAdapter.addTab(actionBar.newTab().setText("Resources"), ResourcesFragment.class, null);
 	}

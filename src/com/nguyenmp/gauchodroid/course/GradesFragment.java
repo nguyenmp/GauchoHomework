@@ -15,6 +15,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,7 @@ public class GradesFragment extends SherlockFragment implements GradesDownloadLi
 		
 		@Override
 		public void run() {
+			Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 			try {
 				GradeFolder grades = GauchoSpaceClient.getGrade(mCourseID, mCookies);
 				dispatchMessage(grades);

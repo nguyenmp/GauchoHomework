@@ -11,6 +11,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -120,6 +121,7 @@ public class SuperGauchoActivity extends SherlockFragmentActivity {
 		}
 		
 		public void run() {
+			Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 			CookieStore cookies = LoginManager.getCookies(mContext);
 			
 			try {

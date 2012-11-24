@@ -34,6 +34,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -231,6 +232,7 @@ public class LoginFragment extends SherlockFragment implements OnLoginListener {
 		
 		@Override
 		public void run() {
+			Process.setThreadPriority(Process.myTid(), Process.THREAD_PRIORITY_BACKGROUND);
 			try {
 				CookieStore cookie = GauchoSpaceClient.login(mUsername, mPassword);
 				dispatchMessage(cookie);
