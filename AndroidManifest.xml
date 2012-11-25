@@ -36,7 +36,16 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".course.CourseActivity" android:label="@string/gaucho_space" />
-		<activity android:name=".user.UserActivity" android:label="@string/gaucho_space" />
+		<activity android:name=".user.UserActivity" android:label="@string/gaucho_space" >
+		    <intent-filter >
+		        <data 
+		            android:host="gauchospace.ucsb.edu"
+		            android:path="/courses/user/view.php"/>
+		        <data 
+		            android:host="gauchospace.ucsb.edu"
+		            android:path="/courses/mod/forum/user.php"/>
+		    </intent-filter>
+    	</activity>
 		<activity android:name=".browser.BrowserActivity" android:label="@string/app_name" />
 		<activity android:name=".forum.ForumActivity" android:label="@string/app_name" />
 	</application>

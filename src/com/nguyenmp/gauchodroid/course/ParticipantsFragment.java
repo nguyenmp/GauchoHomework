@@ -15,7 +15,9 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +36,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.login.LoginManager;
+import com.nguyenmp.gauchodroid.user.UserActivity;
 import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.parser.WeeklyOutlineParser.UnparsableHtmlException;
 import com.nguyenmp.gauchospace.thing.User;
@@ -66,6 +69,7 @@ public class ParticipantsFragment extends SherlockFragment implements Participan
 		mParticipants = new ArrayList<User>();
 		mListAdapter = new ParticipantsListAdapter(mParticipants, mContext, this);
 		mListView.setAdapter(mListAdapter);
+		mListView.setOnItemClickListener(this);
 		
 		if (inState != null && inState.containsKey(SAVED_STATE_KEY_PARTICIPANTS)) {
 			onDownloaded((List<User>) inState.getSerializable(SAVED_STATE_KEY_PARTICIPANTS), "Unknown error");
@@ -86,7 +90,9 @@ public class ParticipantsFragment extends SherlockFragment implements Participan
 	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		User participant = mParticipants.get(position);
 		
-		
+		Intent intent = new Intent(mContext, UserActivity.class);
+		intent.setData(Uri.parse(participant.getUrl()));
+		startActivity(intent);
 	}
 
 	@Override

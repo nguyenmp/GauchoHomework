@@ -38,12 +38,12 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.R;
-import com.nguyenmp.gauchodroid.browser.BrowserActivity;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.common.MenuUtils;
 import com.nguyenmp.gauchodroid.course.CourseActivity;
 import com.nguyenmp.gauchodroid.login.LoginActivity;
 import com.nguyenmp.gauchodroid.login.LoginManager;
+import com.nguyenmp.gauchodroid.user.UserActivity;
 import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.thing.Course;
 import com.nguyenmp.gauchospace.thing.Instructor;
@@ -135,7 +135,7 @@ public class MyCoursesFragment extends SherlockFragment implements MyCoursesDown
 			button.setText(instructor.getName());
 			button.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(v.getContext(), BrowserActivity.class);
+					Intent intent = new Intent(v.getContext(), UserActivity.class);
 					intent.setData(Uri.parse(instructor.getUrl()));
 					startActivity(intent);
 				}
