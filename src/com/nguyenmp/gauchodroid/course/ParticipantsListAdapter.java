@@ -55,7 +55,8 @@ public class ParticipantsListAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return 0;
 	}
-
+	
+	private int mHeight = LinearLayout.LayoutParams.FILL_PARENT;
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		User participant = mParticipants.get(position);
@@ -66,9 +67,10 @@ public class ParticipantsListAdapter extends BaseAdapter {
 		
 		ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.list_item_user_progress_bar);
 		progressBar.setVisibility(View.VISIBLE);
+		if (progressBar.getMeasuredHeight() > 0) mHeight = progressBar.getMeasuredHeight();
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.list_item_user_avatar);
 		imageView.setVisibility(View.VISIBLE);
-		imageView.setLayoutParams(new LinearLayout.LayoutParams(progressBar.getMeasuredHeight(), progressBar.getMeasuredHeight()));
+		imageView.setLayoutParams(new LinearLayout.LayoutParams(mHeight, mHeight));
 		Bitmap bitmap = mImageStore.download(participant.getAvatarUrl(), mListener);
 		if (bitmap != null) {
 			imageView.setImageBitmap(bitmap);
