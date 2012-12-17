@@ -3,6 +3,7 @@ package com.nguyenmp.gauchodroid.forum;
 import java.util.List;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class ForumsListAdapter extends BaseAdapter {
 		nameTextView.setText(forum.getName());
 		
 		TextView descriptionTextView = (TextView) convertView.findViewById(R.id.list_item_forum_description);
-		descriptionTextView.setText(forum.getDescription());
+		descriptionTextView.setText(Html.fromHtml(forum.getDescription()));
 		
 		TextView discussionsTextView = (TextView) convertView.findViewById(R.id.list_item_forum_discussions);
 		discussionsTextView.setText("Discussions: " + forum.getNumberOfDiscussions());
