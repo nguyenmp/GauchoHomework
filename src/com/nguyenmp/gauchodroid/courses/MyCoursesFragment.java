@@ -10,6 +10,13 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Fragment;
+import org.holoeverywhere.widget.Button;
+import org.holoeverywhere.widget.LinearLayout;
+import org.holoeverywhere.widget.ListView;
+import org.holoeverywhere.widget.ProgressBar;
+import org.holoeverywhere.widget.TextView;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
@@ -21,20 +28,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.R;
@@ -48,7 +48,7 @@ import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.thing.Course;
 import com.nguyenmp.gauchospace.thing.Instructor;
 
-public class MyCoursesFragment extends SherlockFragment implements MyCoursesDownloadListener, OnItemClickListener, OnItemLongClickListener {
+public class MyCoursesFragment extends Fragment implements MyCoursesDownloadListener, OnItemClickListener, OnItemLongClickListener {
 	private BaseAdapter mListAdapter;
 	private List<Course> mCourseList;
 	private String mText;

@@ -7,24 +7,24 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import org.apache.http.client.CookieStore;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Dialog;
+import org.holoeverywhere.app.Fragment;
+import org.holoeverywhere.widget.Button;
+import org.holoeverywhere.widget.LinearLayout;
+import org.holoeverywhere.widget.TextView;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.login.LoginManager;
@@ -32,7 +32,7 @@ import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.thing.grade.GradeFolder;
 import com.nguyenmp.gauchospace.thing.grade.GradeItem;
 
-public class GradesFragment extends SherlockFragment implements GradesDownloadListener {
+public class GradesFragment extends Fragment implements GradesDownloadListener {
 	public static final String ARGUMENT_COURSE_ID = "argument_course_id";
 	private LinearLayout mContentView;
 	private Context mContext;

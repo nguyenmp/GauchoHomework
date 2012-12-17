@@ -1,5 +1,8 @@
 package com.nguyenmp.gauchodroid.browser;
 
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.Toast;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -8,14 +11,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.webkit.WebView;
-import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 
-public class BrowserActivity extends SherlockActivity {
+public class BrowserActivity extends Activity {
 	private WebView mWebView = null;
 	/**
 	 * The Key specifying the String extra for the HTML data.  The value will 

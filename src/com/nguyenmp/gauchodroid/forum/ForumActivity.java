@@ -1,14 +1,15 @@
 package com.nguyenmp.gauchodroid.forum;
 
+import org.holoeverywhere.app.Activity;
+
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
 
-public class ForumActivity extends SherlockFragmentActivity {
+public class ForumActivity extends Activity {
 	public static final String EXTRA_FORUM_ID = "extra+forum_id";
 	
 	private ViewPager mViewPager;

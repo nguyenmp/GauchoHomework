@@ -6,7 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
+import org.holoeverywhere.app.Activity;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,7 +17,6 @@ import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class TabsAdapter extends FragmentStatePagerAdapter
 			implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
@@ -35,7 +35,7 @@ public class TabsAdapter extends FragmentStatePagerAdapter
 		}
 	}
 	
-	public TabsAdapter(SherlockFragmentActivity activity, ViewPager pager) {
+	public TabsAdapter(Activity activity, ViewPager pager) {
 		super(activity.getSupportFragmentManager());
 		mActivity = activity;
 		mActionBar = activity.getSupportActionBar();

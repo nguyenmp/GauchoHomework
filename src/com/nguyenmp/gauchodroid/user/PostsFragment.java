@@ -1,14 +1,15 @@
 package com.nguyenmp.gauchodroid.user;
 
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Fragment;
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.nguyenmp.gauchodroid.R;
 
-public class PostsFragment extends SherlockFragment {
+public class PostsFragment extends Fragment {
 	public static final String ARGUMENT_USER_ID = "argument_user_id";
 	
 	@Override

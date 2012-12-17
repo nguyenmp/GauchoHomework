@@ -8,21 +8,21 @@ import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Fragment;
+import org.holoeverywhere.widget.ListView;
+import org.holoeverywhere.widget.ProgressBar;
+import org.holoeverywhere.widget.TextView;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.login.LoginManager;
@@ -30,7 +30,7 @@ import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.thing.Discussion;
 
 
-public class ForumFragment extends SherlockFragment implements ForumDownloadListener {
+public class ForumFragment extends Fragment implements ForumDownloadListener {
 	//These are arguments/keys used to store into bundles
 	public static final String ARGUMENT_KEY_FORUM_ID = "argument_forum id";
 	private static final String SAVED_STATE_KEY_DISCUSSIONS = "in_state_discussions";

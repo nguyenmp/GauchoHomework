@@ -1,14 +1,14 @@
 package com.nguyenmp.gauchodroid.browser;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import org.holoeverywhere.app.Activity;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 public class MyWebChromeClient extends WebChromeClient {
-	private SherlockActivity mActivity;
+	private Activity mActivity;
 	
-	public MyWebChromeClient(SherlockActivity activity) {
+	public MyWebChromeClient(Activity activity) {
 		mActivity = activity;
 	}
 	

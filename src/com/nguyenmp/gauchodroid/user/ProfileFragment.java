@@ -9,6 +9,12 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.Fragment;
+import org.holoeverywhere.widget.LinearLayout;
+import org.holoeverywhere.widget.ProgressBar;
+import org.holoeverywhere.widget.TextView;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
@@ -21,16 +27,11 @@ import android.os.Message;
 import android.os.Process;
 import android.text.Html;
 import android.text.util.Linkify;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
@@ -40,7 +41,7 @@ import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.thing.User;
 import com.nguyenmp.gauchospace.thing.User.Attribute;
 
-public class ProfileFragment extends SherlockFragment implements ProfileDownloadListener, AvatarDownloadListener {
+public class ProfileFragment extends Fragment implements ProfileDownloadListener, AvatarDownloadListener {
 	public static final String ARGUMENT_USER_ID = "argument_user_id";
 	public static final String ARGUMENT_COURSE_ID = "argument_course_id";
 	private static final String SAVED_STATE_KEY_USER = "saved_state_key_user";
@@ -99,7 +100,7 @@ public class ProfileFragment extends SherlockFragment implements ProfileDownload
 				mTextView.setVisibility(View.VISIBLE);
 			}
 		} else {
-			SherlockFragmentActivity activity = getSherlockActivity();
+			Activity activity = getSupportActivity();
 			if (activity != null) activity.getSupportActionBar().setTitle(user.getName());
 			
 			Handler handler = new AvatarDownloadHandler(this);

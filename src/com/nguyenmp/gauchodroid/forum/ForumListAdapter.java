@@ -2,12 +2,13 @@ package com.nguyenmp.gauchodroid.forum;
 
 import java.util.List;
 
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.widget.TextView;
+
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchospace.thing.Discussion;

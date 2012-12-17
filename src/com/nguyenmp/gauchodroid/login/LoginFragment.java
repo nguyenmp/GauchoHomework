@@ -27,8 +27,13 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.AlertDialog;
+import org.holoeverywhere.app.Fragment;
+import org.holoeverywhere.widget.Button;
+import org.holoeverywhere.widget.EditText;
+import org.holoeverywhere.widget.Toast;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,16 +41,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.loopj.android.http.PersistentCookieStore;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
@@ -56,7 +56,7 @@ import com.nguyenmp.gauchospace.GauchoSpaceClient;
  * The activity to handle logging into GauchoSpace.
  * @author Mark Nguyen
  */
-public class LoginFragment extends SherlockFragment implements OnLoginListener {
+public class LoginFragment extends Fragment implements OnLoginListener {
 //	private Context mContext;
 	private static LoginTask mLoginTask = null;
 	/**

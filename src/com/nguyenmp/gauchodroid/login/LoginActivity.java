@@ -21,12 +21,13 @@
  */
 package com.nguyenmp.gauchodroid.login;
 
+import org.holoeverywhere.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.nguyenmp.gauchodroid.EventFragment;
 import com.nguyenmp.gauchodroid.PhotoFragment;
 import com.nguyenmp.gauchodroid.R;
@@ -38,7 +39,7 @@ import com.nguyenmp.gauchodroid.forum.ForumFragment;
  * The activity to handle logging into GauchoSpace.
  * @author Mark Nguyen
  */
-public class LoginActivity extends SherlockFragmentActivity 
+public class LoginActivity extends Activity  
 			implements OnLoginListener {
 	
 	private ViewPager mViewPager;
