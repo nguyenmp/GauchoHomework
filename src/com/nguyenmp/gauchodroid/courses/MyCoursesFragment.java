@@ -133,7 +133,7 @@ public class MyCoursesFragment extends Fragment implements MyCoursesDownloadList
 		
 		LinearLayout instructorGroup = (LinearLayout) contentView.findViewById(R.id.dialog_course_description_instructors);
 		for (final Instructor instructor : instructors) {
-			final Button button = new Button(mContext);
+			final Button button = (Button) LayoutInflater.inflate(mContext, R.layout.button_instructor, instructorGroup, false);
 			button.setText(instructor.getName());
 			button.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
@@ -146,8 +146,6 @@ public class MyCoursesFragment extends Fragment implements MyCoursesDownloadList
 		}
 		
 		builder.show();
-		
-		
 		
 		return true;
 	}
