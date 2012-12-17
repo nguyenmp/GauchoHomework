@@ -94,7 +94,7 @@ public class PhotoFragment extends Fragment
 		//If there was a previous state and it was already initialized
 		if (inState != null && inState.containsKey(KEY_PHOTO_DOWNLOAD)) {
 			PhotoDownload payload = (PhotoDownload) inState.getParcelable(KEY_PHOTO_DOWNLOAD);
-			setPhotoDownload(payload);
+			onPhotoDownloaded(payload, "Unused string goes here");
 		}
 		
 		//Otherwise, we are generating this fragment from scratch
@@ -146,34 +146,11 @@ public class PhotoFragment extends Fragment
 	}
 	
 	private void refresh() {
-		mProgressBar.setVisibility(View.VISIBLE);
-		mImageView.setVisibility(View.GONE);
-		mHeaderView.setVisibility(View.GONE);
+		onPhotoDownloaded(null, null);
 		
-		PhotoDownloadHandler handler = new PhotoDownloadHandler(this, mProgressBar, mHeaderView);
+		PhotoDownloadHandler handler = new PhotoDownloadHandler(this);
 		Thread downloadThread = new PhotoDownloadThread(handler);
 		downloadThread.start();
-	}
-	
-	private void setPhotoDownload(PhotoDownload payload) {
-		//Set the current payload to the one we just got
-		mCurrentPhotoDownload = payload;
-		
-		//Hide the progress bar
-		mProgressBar.setVisibility(View.GONE);
-		
-		//Initialize the image view
-		mImageView.setImageBitmap(mCurrentPhotoDownload.bitmap);
-		mImageView.setVisibility(View.VISIBLE);
-		
-		//Initialize the header view
-		//Make sure to display null for empty titles and display names
-		//Set up the header to be "'title' by 'displayName'"
-		mHeaderView.setText(Html.fromHtml(
-						(mCurrentPhotoDownload.title.length() == 0 ? "<i>\"Untitled\"</i>" : "<i>\"" + mCurrentPhotoDownload.title + "\"</i>") + 
-						" by " + 
-						(mCurrentPhotoDownload.displayName.length() == 0 ? "<b>Anonymous</b>" : "<b>" + mCurrentPhotoDownload.displayName + "</b>")));
-		mHeaderView.setVisibility(View.VISIBLE);
 	}
 	
 	/**
@@ -256,52 +233,79 @@ public class PhotoFragment extends Fragment
 	 *
 	 */
 	private static class PhotoDownloadHandler extends Handler {
-		private final TextView mHeaderView;
 		private final PhotoDownloadListener mListener;
-		private final ProgressBar mProgressBar;
 		
-		/**
-		 * Creates a new 
-		 * @param progressBar The progress bar to hide when progress is received
-		 * @param imageView The image view to update and show when a bitmap was 
-		 * downloaded and returned here.
-		 * @param headerView The text view to display the name and title of the 
-		 * piece or any error messages that may result from the PhotoDownloadThread.
-		 */
-		private PhotoDownloadHandler(PhotoDownloadListener listener, ProgressBar progressBar, TextView headerView) {
-			mHeaderView = headerView;
+		private PhotoDownloadHandler(PhotoDownloadListener listener) {
 			mListener = listener;
-			mProgressBar = progressBar;
 		}
 		
 		@Override
 		public void handleMessage(Message message) {
-			mProgressBar.setVisibility(View.GONE);
-			
 			//If we get a payload
 			if (message.obj != null && message.obj instanceof PhotoDownload) {
 				PhotoDownload photoDownload = (PhotoDownload) message.obj;
-				mListener.onPhotoDownloaded(photoDownload);
+				mListener.onPhotoDownloaded(photoDownload, "Unknown error that should never happen has happened!");
 			}
 			
 			//If the payload fails to initialize
 			else if (message.obj != null && message.obj instanceof Exception) {
 				//Alert user with header view
-				mHeaderView.setText("Error downloading photo:\n\n" + ((Exception) message.obj + "\n\nTap to refresh").toString());
-				mHeaderView.setVisibility(View.VISIBLE);
+				mListener.onPhotoDownloaded(null, "Error downloading photo:\n\n" + ((Exception) message.obj + "\n\nTap to refresh").toString());
 			}
 			
 			//If some unknown error occured and something freakish and unexpected happened
 			else {
 				//Alert the user with the header view
-				mHeaderView.setText("Error downloading photo:\n\n" + "Unknown error \n\nTap to refresh");
-				mHeaderView.setVisibility(View.VISIBLE);
+				mListener.onPhotoDownloaded(null, "Error downloading photo:\n\n" + "Unknown error \n\nTap to refresh");
 			}
 		}
 	}
 
 	@Override
-	public void onPhotoDownloaded(PhotoDownload download) {
-		setPhotoDownload(download);
+	public void onPhotoDownloaded(PhotoDownload download, String message) {
+		//Set the current payload to the one we just got
+		mCurrentPhotoDownload = download;
+		
+		if (download == null) {
+			if (message == null) {
+				//This is an indicator that there is progress going on
+				
+				//Show the progress bar
+				mProgressBar.setVisibility(View.VISIBLE);
+				
+				//Hide everything else
+				mImageView.setVisibility(View.GONE);
+				mHeaderView.setVisibility(View.GONE);
+			} else {
+				//We weren't given a payload but we got a message
+				//meaning we got an error message
+				
+				//Show the text view
+				mHeaderView.setText(message);
+				mHeaderView.setVisibility(View.VISIBLE);
+				
+				//Hide everything else
+				mImageView.setVisibility(View.GONE);
+				mProgressBar.setVisibility(View.GONE);
+			}
+		} else {
+			//Show the payload that we got
+			
+			//Initialize the image view
+			mImageView.setImageBitmap(mCurrentPhotoDownload.bitmap);
+			mImageView.setVisibility(View.VISIBLE);
+			
+			//Initialize the header view
+			//Make sure to display null for empty titles and display names
+			//Set up the header to be "'title' by 'displayName'"
+			mHeaderView.setText(Html.fromHtml(
+							(mCurrentPhotoDownload.title.length() == 0 ? "<i>\"Untitled\"</i>" : "<i>\"" + mCurrentPhotoDownload.title + "\"</i>") + 
+							" by " + 
+							(mCurrentPhotoDownload.displayName.length() == 0 ? "<b>Anonymous</b>" : "<b>" + mCurrentPhotoDownload.displayName + "</b>")));
+			mHeaderView.setVisibility(View.VISIBLE);
+			
+			//Hide everything else
+			mProgressBar.setVisibility(View.GONE);
+		}
 	}
 }

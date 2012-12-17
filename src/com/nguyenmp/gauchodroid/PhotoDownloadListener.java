@@ -1,5 +1,5 @@
 package com.nguyenmp.gauchodroid;
 
 public interface PhotoDownloadListener {
-	public void onPhotoDownloaded(PhotoDownload download);
+	public void onPhotoDownloaded(PhotoDownload download, String message);
 }
