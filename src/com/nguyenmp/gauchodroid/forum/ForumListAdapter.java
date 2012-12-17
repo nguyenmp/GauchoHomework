@@ -1,5 +1,9 @@
 package com.nguyenmp.gauchodroid.forum;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.holoeverywhere.LayoutInflater;
@@ -11,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.nguyenmp.gauchodroid.R;
+import com.nguyenmp.gauchodroid.common.StringUtils;
 import com.nguyenmp.gauchospace.thing.Discussion;
 
 public class ForumListAdapter extends BaseAdapter {
@@ -53,10 +58,18 @@ public class ForumListAdapter extends BaseAdapter {
 		nameTextView.setText(discussion.name);
 		
 		TextView repliesTextView = (TextView) convertView.findViewById(R.id.list_item_discussion_replies);
-		repliesTextView.setText("Replies: " + discussion.replies);
+		repliesTextView.setText(discussion.replies + " people have replied!");
 		
 		TextView lastPostTextView = (TextView) convertView.findViewById(R.id.list_item_discussion_last_post);
-		lastPostTextView.setText(discussion.lastPost.timestamp);
+		DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy, hh:mm aa");
+		try {
+			Date date = dateFormat.parse(discussion.lastPost.timestamp);
+			String timeSinceEpoch = StringUtils.timeSinceEpochPrecise(date.getTime()/1000L);
+			lastPostTextView.setText(timeSinceEpoch);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			lastPostTextView.setText(discussion.lastPost.timestamp);
+		}
 		
 		//Return the generated view
 		return convertView;
