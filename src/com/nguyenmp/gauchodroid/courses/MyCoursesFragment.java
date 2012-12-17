@@ -11,6 +11,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.AlertDialog;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.LinearLayout;
@@ -20,7 +21,6 @@ import org.holoeverywhere.widget.TextView;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -122,14 +122,16 @@ public class MyCoursesFragment extends Fragment implements MyCoursesDownloadList
 		final String summary = course.getSummary();
 		final Instructor[] instructors = course.getInstructors().toArray(new Instructor[] {});
 		
-		Dialog dialog = new Dialog(mContext);
-		dialog.setTitle(name + ": " + title);
-		dialog.setContentView(R.layout.dialog_course_description);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setTitle(name + ": " + title);
 		
-		TextView summaryView = (TextView) dialog.findViewById(R.id.dialog_course_description_summary);
+		View contentView = LayoutInflater.inflate(builder.getContext(), R.layout.dialog_course_description);
+		builder.setView(contentView);
+		
+		TextView summaryView = (TextView) contentView.findViewById(R.id.dialog_course_description_summary);
 		summaryView.setText(summary);
 		
-		LinearLayout instructorGroup = (LinearLayout) dialog.findViewById(R.id.dialog_course_description_instructors);
+		LinearLayout instructorGroup = (LinearLayout) contentView.findViewById(R.id.dialog_course_description_instructors);
 		for (final Instructor instructor : instructors) {
 			final Button button = new Button(mContext);
 			button.setText(instructor.getName());
@@ -143,7 +145,7 @@ public class MyCoursesFragment extends Fragment implements MyCoursesDownloadList
 			instructorGroup.addView(button);
 		}
 		
-		dialog.show();
+		builder.show();
 		
 		
 		
