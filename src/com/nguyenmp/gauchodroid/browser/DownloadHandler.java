@@ -47,13 +47,26 @@ public class DownloadHandler extends Handler {
 			
 			mNotif.setLatestEventInfo(mContext, "Downloaded " + file.getName(), file.getPath(), contentIntent);
 		} else if (message.obj instanceof Exception){
+			//Set so the notification goes away on click
 			mNotif.flags &= Notification.FLAG_AUTO_CANCEL;
-			mNotif.setLatestEventInfo(mContext, message.obj.getClass().getName(), ((Exception) message.obj).toString() , null);
+			
+			//Create an empty intent to fire
+			PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(), 0);
+			
+			//Update the notification data
+			mNotif.setLatestEventInfo(mContext, "Download Failed", ((Exception) message.obj).getMessage() , contentIntent);
 		} else {
+			//Set so the notification goes away on click
 			mNotif.flags &= Notification.FLAG_AUTO_CANCEL;
-			mNotif.setLatestEventInfo(mContext, "Error: Failed to download", "", null);
+			
+			//Create an empty intent to fire
+			PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(), 0);
+			
+			//Update the notification data
+			mNotif.setLatestEventInfo(mContext, "Download Failed", "Unknown Reason", contentIntent);
 		}
 		
+		//Dispatch the new notification
 		NotificationManager nm = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.notify(mID, mNotif);
 	}
