@@ -13,41 +13,126 @@
 	
 	
 	<application 
+	    android:allowBackup="true"
 	    android:hardwareAccelerated="true"
 	    android:icon="@drawable/ic_launcher"
 	    android:label="@string/app_name" 
 	    android:theme="@style/Holo.Theme" >
+	    
+	    
 		<activity 
 		    android:name=".login.LoginActivity" 
 		    android:label="@string/gaucho_space" 
 		    android:windowSoftInputMode="adjustResize" >
 		</activity>
-		<activity android:name=".upload.UploadActivity" android:label="@string/gaucho_space" >
+		
+		
+		<activity 
+		    android:exported="true"
+		    android:name=".upload.UploadActivity" 
+		    android:label="@string/gaucho_space" >
+		        
+			<!-- This intent filter is for uploading photos via the share feature-->
 		    <intent-filter>
 		        <action android:name="android.intent.action.SEND" />
 		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
 		        <data android:mimeType="image/*" />
 		    </intent-filter>
+		    
+			<!-- This intent filter is for uploading photos/events via the webpage-->
+		    <intent-filter>
+		        <action android:name="android.intent.action.VIEW" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="https" android:host="gauchospace.ucsb.edu" android:path="/courses/blocks/ucsb/news_feed/index.php" />
+				<data android:scheme="https" android:host="gauchospace.ucsb.edu" android:path="/courses/blocks/ucsb/news_feed/index2.php" />
+		    </intent-filter>
 	    </activity>
-		<activity android:name=".courses.MyCoursesActivity" android:label="@string/gaucho_space" >
+	    
+		
+		<activity 
+		    android:name=".courses.MyCoursesActivity" 
+		    android:label="@string/gaucho_space" >
 		    <intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+				<data 
+				    android:scheme="https" 
+				    android:host="gauchospace.ucsb.edu" 
+				    android:path="/" />
+				<data 
+				    android:scheme="https" 
+				    android:host="gauchospace.ucsb.edu" 
+				    android:pathPrefix="/courses/login/" />
+				<data 
+				    android:scheme="https" 
+				    android:host="gauchospace.ucsb.edu" 
+				    android:path="/courses/" />
+		    </intent-filter>
+		</activity>
+		
+		
+		<activity 
+		    android:name=".course.CourseActivity" 
+		    android:label="@string/gaucho_space" >
+			<intent-filter >
+			    <action android:name="android.intent.action.VIEW" />
+			    <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+			    <data 
+			        android:scheme="https" 
+			        android:host="gauchospace.ucsb.edu" 
+			        android:path="/courses/user/index.php" />
+		        <data
+		            android:scheme="https"
+		            android:host="gauchospace.ucsb.edu"
+		            android:path="/courses/mod/forum/view.php" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".course.CourseActivity" android:label="@string/gaucho_space" />
-		<activity android:name=".user.UserActivity" android:label="@string/gaucho_space" >
+		
+		
+		<activity 
+		    android:name=".user.UserActivity" 
+		    android:label="@string/gaucho_space" >
 		    <intent-filter >
+		        <action android:name="android.intent.action.VIEW" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
 		        <data 
+		            android:scheme="https"
 		            android:host="gauchospace.ucsb.edu"
 		            android:path="/courses/user/view.php"/>
 		        <data 
+		            android:scheme="https"
 		            android:host="gauchospace.ucsb.edu"
 		            android:path="/courses/mod/forum/user.php"/>
 		    </intent-filter>
     	</activity>
+    	
+		
 		<activity android:name=".browser.BrowserActivity" android:label="@string/app_name" />
-		<activity android:name=".forum.ForumActivity" android:label="@string/app_name" />
+		
+		
+		<activity 
+		    android:name=".forum.ForumActivity" 
+		    android:label="@string/app_name" >
+		    <intent-filter >
+		        <action android:name="android.intent.action.VIEW" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+		        <data
+		            android:scheme="https"
+		            android:host="gauchospace.ucsb.edu"
+		            android:path="/courses/mod/forum/view.php" />
+		    </intent-filter>
+	    </activity>
 	</application>
 	
 </manifest>
