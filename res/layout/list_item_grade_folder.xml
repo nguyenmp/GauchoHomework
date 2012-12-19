@@ -3,6 +3,10 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/list_item_grade_folder_layout"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
     android:orientation="vertical" >
     
     <TextView
@@ -18,7 +22,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dip"
-        android:layout_margin="8dip"
         android:orientation="vertical"
         android:id="@+id/list_item_grade_folder_content" />
     

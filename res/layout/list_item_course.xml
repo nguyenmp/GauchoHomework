@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
     android:orientation="vertical" >
     
     <TextView
@@ -9,19 +11,30 @@
         android:layout_height="wrap_content"
     	android:gravity="center_horizontal"
         android:textStyle="bold"
-        android:textSize="28dip"
+        android:textSize="18sp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="2dp"
+        android:textColor="@color/primary_text_holo_dark"
         android:id="@+id/list_item_course_name" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
     	android:gravity="center_horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:id="@+id/list_item_course_title" />
     
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
     	android:gravity="center_horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
         android:id="@+id/list_item_course_quarter" />
     
 </LinearLayout>

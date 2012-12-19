@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
     android:orientation="vertical" >
     
     <TextView
@@ -10,12 +12,17 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:textStyle="bold"
-        android:textSize="28dip"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/primary_text_holo_dark"
         android:id="@+id/list_item_weekly_outline_week" />
     
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"	
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:id="@+id/list_item_weekly_outline_summary" />
     
 </LinearLayout>

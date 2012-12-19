@@ -9,11 +9,13 @@
             android:id="@+id/list_item_user_progress_bar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
+            android:padding="4dp"
             android:layout_height="wrap_content" />
     
     <ImageView
             android:id="@+id/list_item_user_avatar"
             android:visibility="gone"
+            android:padding="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     
@@ -25,17 +27,22 @@
 	    <TextView
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:textSize="20dip"
+	        android:textStyle="bold"
+	        android:textColor="@color/primary_text_holo_dark"
+	        android:textSize="18sp"
+	        android:padding="4dp"
 	        android:id="@+id/list_item_user_name" />
 	    
 	    <TextView
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
+	        android:padding="4dp"
 	        android:id="@+id/list_item_user_city" />
 	    
 	    <TextView
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
+	        android:padding="4dp"
 	        android:id="@+id/list_item_user_country" />
 	    
     </LinearLayout>
