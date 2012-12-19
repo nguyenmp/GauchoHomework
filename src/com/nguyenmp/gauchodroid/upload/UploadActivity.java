@@ -1,5 +1,6 @@
 package com.nguyenmp.gauchodroid.upload;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
@@ -39,8 +40,17 @@ public class UploadActivity extends SuperGauchoActivity {
 		
 		//Default to the given selected tab based on the extra given
 		Bundle extras = getIntent().getExtras();
-		if (extras.containsKey(EXTRA_SELECTED_TAB)) {
+		Uri data = getIntent().getData();
+		if (extras != null && extras.containsKey(EXTRA_SELECTED_TAB)) {
 			actionBar.setSelectedNavigationItem(extras.getInt(EXTRA_SELECTED_TAB));
+		} else if (data != null) {
+			String target = data.getLastPathSegment();
+			if (target != null) {
+				if (target.equalsIgnoreCase("index.php")) 
+					actionBar.setSelectedNavigationItem(SELECTED_TAB_PHOTO);
+				else if (target.equalsIgnoreCase("index2.php"))
+					actionBar.setSelectedNavigationItem(SELECTED_TAB_EVENT);
+			}
 		}
 	}
 }
