@@ -1,0 +1,6 @@
+[submodule "includes/ActionBarSherlock"]
+	path = includes/ActionBarSherlock
+	url = https://github.com/JakeWharton/ActionBarSherlock.git
+[submodule "includes/HoloEverywhere"]
+	path = includes/HoloEverywhere
+	url = https://github.com/Prototik/HoloEverywhere.git
