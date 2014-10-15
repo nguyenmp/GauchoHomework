@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nguyenmp.gauchodroid">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
@@ -18,7 +20,9 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
-        <activity android:name=".courses.MyCoursesActivity" android:label="@string/gaucho_space" >
+        <activity android:name=".courses.MyCoursesActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/gaucho_space" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
