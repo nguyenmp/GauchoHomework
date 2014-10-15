@@ -1,16 +1,15 @@
 package com.nguyenmp.gauchodroid.user;
 
-import org.holoeverywhere.app.Activity;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.TabsAdapter;
 
-public class UserActivity extends Activity {
+public class UserActivity extends ActionBarActivity {
 	public static final String EXTRA_USER_ID = "extra_user_id";
 	public static final String EXTRA_COURSE_ID = "extra_course_id";
 	public static final String EXTRA_TAB_SELECTED = "extra_tab_selected";

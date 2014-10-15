@@ -1,0 +1,3 @@
+[submodule "GauchoSpace"]
+	path = GauchoSpace
+	url = https://github.com/nguyenmp/GauchoSpace.git

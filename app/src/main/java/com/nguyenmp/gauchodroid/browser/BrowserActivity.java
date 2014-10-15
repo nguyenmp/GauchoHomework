@@ -1,22 +1,20 @@
 package com.nguyenmp.gauchodroid.browser;
 
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.widget.Toast;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Toast;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
-
-public class BrowserActivity extends Activity {
+public class BrowserActivity extends ActionBarActivity {
 	private WebView mWebView = null;
 	/**
 	 * The Key specifying the String extra for the HTML data.  The value will 

@@ -10,17 +10,10 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.AlertDialog;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.Button;
-import org.holoeverywhere.widget.LinearLayout;
-import org.holoeverywhere.widget.ListView;
-import org.holoeverywhere.widget.ProgressBar;
-import org.holoeverywhere.widget.TextView;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,15 +21,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.common.MenuUtils;
@@ -125,7 +125,7 @@ public class MyCoursesFragment extends Fragment implements MyCoursesDownloadList
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setTitle(name + ": " + title);
 		
-		View contentView = LayoutInflater.inflate(builder.getContext(), R.layout.dialog_course_description);
+		View contentView = LayoutInflater.from(mContext).inflate(R.layout.dialog_course_description, null, false);
 		builder.setView(contentView);
 		
 		TextView summaryView = (TextView) contentView.findViewById(R.id.dialog_course_description_summary);
@@ -133,7 +133,7 @@ public class MyCoursesFragment extends Fragment implements MyCoursesDownloadList
 		
 		LinearLayout instructorGroup = (LinearLayout) contentView.findViewById(R.id.dialog_course_description_instructors);
 		for (final Instructor instructor : instructors) {
-			final Button button = (Button) LayoutInflater.inflate(mContext, R.layout.button_instructor, instructorGroup, false);
+			final Button button = (Button) LayoutInflater.from(mContext).inflate(R.layout.button_instructor, instructorGroup, false);
 			button.setText(instructor.getName());
 			button.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {

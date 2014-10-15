@@ -21,8 +21,7 @@
  */
 package com.nguyenmp.gauchodroid.common;
 
-import org.holoeverywhere.app.AlertDialog;
-
+import android.app.AlertDialog;
 import android.content.Context;
 
 public class AlertDialogFactory {

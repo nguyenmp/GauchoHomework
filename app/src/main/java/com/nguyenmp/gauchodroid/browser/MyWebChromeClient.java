@@ -1,14 +1,13 @@
 package com.nguyenmp.gauchodroid.browser;
 
-import org.holoeverywhere.app.Activity;
-
+import android.support.v7.app.ActionBarActivity;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 public class MyWebChromeClient extends WebChromeClient {
-	private Activity mActivity;
+	private ActionBarActivity mActivity;
 	
-	public MyWebChromeClient(Activity activity) {
+	public MyWebChromeClient(ActionBarActivity activity) {
 		mActivity = activity;
 	}
 	

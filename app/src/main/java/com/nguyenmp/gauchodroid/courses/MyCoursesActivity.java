@@ -2,8 +2,8 @@ package com.nguyenmp.gauchodroid.courses;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.nguyenmp.gauchodroid.EventFragment;
 import com.nguyenmp.gauchodroid.PhotoFragment;
 import com.nguyenmp.gauchodroid.R;

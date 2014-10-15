@@ -1,23 +1,5 @@
 package com.nguyenmp.gauchodroid.user;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.LinearLayout;
-import org.holoeverywhere.widget.ProgressBar;
-import org.holoeverywhere.widget.TextView;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,14 +7,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.text.util.Linkify;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.nguyenmp.gauchodroid.R;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.course.AvatarDownloadListener;
@@ -40,6 +27,18 @@ import com.nguyenmp.gauchodroid.login.LoginManager;
 import com.nguyenmp.gauchospace.GauchoSpaceClient;
 import com.nguyenmp.gauchospace.thing.User;
 import com.nguyenmp.gauchospace.thing.User.Attribute;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 
 public class ProfileFragment extends Fragment implements ProfileDownloadListener, AvatarDownloadListener {
 	public static final String ARGUMENT_USER_ID = "argument_user_id";
@@ -100,8 +99,8 @@ public class ProfileFragment extends Fragment implements ProfileDownloadListener
 				mTextView.setVisibility(View.VISIBLE);
 			}
 		} else {
-			Activity activity = getSupportActivity();
-			if (activity != null) activity.getSupportActionBar().setTitle(user.getName());
+			FragmentActivity activity = getActivity();
+			if (activity != null) activity.getActionBar().setTitle(user.getName());
 			
 			Handler handler = new AvatarDownloadHandler(this);
 			Thread thread = new AvatarDownloadThread(user.getAvatarUrl(), handler);

@@ -1,22 +1,21 @@
 package com.nguyenmp.gauchodroid.forum;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.nguyenmp.gauchodroid.R;
+import com.nguyenmp.gauchodroid.common.StringUtils;
+import com.nguyenmp.gauchospace.thing.Discussion;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.widget.TextView;
-
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-
-import com.nguyenmp.gauchodroid.R;
-import com.nguyenmp.gauchodroid.common.StringUtils;
-import com.nguyenmp.gauchospace.thing.Discussion;
 
 public class ForumListAdapter extends BaseAdapter {
 	private final List<Discussion> mDiscussions;

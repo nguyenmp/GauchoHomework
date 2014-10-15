@@ -1,8 +1,7 @@
 package com.nguyenmp.gauchodroid.common;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * Menu utilities that are meant to make the process of using menus easier

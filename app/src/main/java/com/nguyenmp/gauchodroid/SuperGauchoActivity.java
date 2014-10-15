@@ -1,26 +1,26 @@
 package com.nguyenmp.gauchodroid;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.AlertDialog;
-import org.holoeverywhere.app.ProgressDialog;
-
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.nguyenmp.gauchodroid.common.HandledThread;
 import com.nguyenmp.gauchodroid.login.LoginManager;
 import com.nguyenmp.gauchospace.GauchoSpaceClient;
 
-public class SuperGauchoActivity extends Activity {
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
+
+import java.io.IOException;
+
+public class SuperGauchoActivity extends ActionBarActivity {
 	
 	private boolean mInProgress = false;
 	

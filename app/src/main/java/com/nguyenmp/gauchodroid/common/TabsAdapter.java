@@ -6,21 +6,20 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.holoeverywhere.app.Activity;
-
 import android.os.Bundle;
 import android.support.v4.app.FixedFragmentStatePagerAdapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
+import static android.support.v7.app.ActionBar.Tab;
 
 public class TabsAdapter extends FixedFragmentStatePagerAdapter
 			implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
-	private final Activity mActivity;
+	private final ActionBarActivity mActivity;
 	private final ActionBar mActionBar;
 	private final ViewPager mViewPager;
 	private final List<TabInfo> mTabs = new ArrayList<TabInfo>();
@@ -35,7 +34,7 @@ public class TabsAdapter extends FixedFragmentStatePagerAdapter
 		}
 	}
 	
-	public TabsAdapter(Activity activity, ViewPager pager) {
+	public TabsAdapter(ActionBarActivity activity, ViewPager pager) {
 		super(activity.getSupportFragmentManager());
 		mActivity = activity;
 		mActionBar = activity.getSupportActionBar();
@@ -44,7 +43,7 @@ public class TabsAdapter extends FixedFragmentStatePagerAdapter
 		mViewPager.setOnPageChangeListener(this);
 	}
 	
-	public void addTab(ActionBar.Tab tab, Class<?> clss, Bundle args) {
+	public void addTab(Tab tab, Class<?> clss, Bundle args) {
 		TabInfo info = new TabInfo(clss, args);
 		tab.setTag(info);
 		tab.setTabListener(this);
@@ -99,7 +98,7 @@ public class TabsAdapter extends FixedFragmentStatePagerAdapter
 	
 	private void selectInSpinnerIfPresent(int position, boolean animate) {
 		try {
-			View actionBarView = mActivity.findViewById(com.actionbarsherlock.R.id.abs__action_bar);
+			View actionBarView = mActivity.findViewById(android.support.v7.appcompat.R.id.action_bar);
 			if (actionBarView == null) {
 				int id = mActivity.getResources().getIdentifier("action_bar", "id", "android");
 				actionBarView = mActivity.findViewById(id);
